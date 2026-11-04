@@ -1,4 +1,5 @@
 DerivedData/
+DerivedData-device/
 build/
 *.xcuserstate
 xcuserdata/
@@ -7,3 +8,4 @@ xcuserdata/
 /LocalTestData/
 .build/
 .swiftpm/
+Packages/LongScreenBridge/target/

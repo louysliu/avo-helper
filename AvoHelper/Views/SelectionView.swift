@@ -12,10 +12,10 @@ struct SelectionView: View {
                 screenshotList
             }
         }
-        .navigationTitle("Avo Helper")
+        .navigationTitle("多张截图拼接")
         .toolbar {
             if !session.screenshots.isEmpty {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
                 }
                 ToolbarItem(placement: .topBarTrailing) {

@@ -14,6 +14,9 @@ struct ResultView: View {
             if !session.warningSeams.isEmpty {
                 warningBanner
             }
+            if !session.videoImages.isEmpty {
+                videoResultSummary
+            }
             preview
         }
         .navigationTitle("拼接结果")
@@ -24,12 +27,13 @@ struct ResultView: View {
                 Button("重新选择") {
                     session.startOver()
                 }
+                .disabled(session.isExporting)
             }
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink(value: AppRoute.crop) {
                     Label("裁剪", systemImage: "crop")
                 }
-                .disabled(session.artifact == nil)
+                .disabled(session.artifact == nil || session.isExporting)
             }
         }
         .safeAreaInset(edge: .bottom) {
@@ -45,6 +49,39 @@ struct ResultView: View {
                 session.finishSharing(item)
             }
         }
+    }
+
+    private var videoResultSummary: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if session.videoImages.count > 1 {
+                Picker("查看片段", selection: Binding(get: { session.selectedVideoImage }, set: session.selectVideoImage)) {
+                    ForEach(session.videoImages.indices, id: \.self) { index in
+                        Text("片段 \(index + 1) / \(session.videoImages.count)").tag(index)
+                    }
+                }
+                .pickerStyle(.menu)
+                .disabled(session.isExporting)
+                Text("片段未强行连接。裁剪、保存和导出仅针对当前片段；切换片段会重置裁剪。")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+            if session.videoIsPartial {
+                Label("结果可能不完整，请检查是否缺少内容。", systemImage: "exclamationmark.triangle")
+                    .font(.footnote).foregroundStyle(.orange)
+            }
+            if !session.videoWarnings.isEmpty {
+                DisclosureGroup("转换提示（\(session.videoWarnings.count)）") {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 6) {
+                            ForEach(Array(session.videoWarnings.enumerated()), id: \.offset) { _, warning in
+                                Text(warning).font(.caption).frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                    }.frame(maxHeight: 140)
+                }
+                .font(.footnote)
+            }
+        }
+        .padding(.horizontal).padding(.vertical, 6)
     }
 
     private var warningBanner: some View {

@@ -1,10 +1,13 @@
 import Observation
 import PhotosUI
 import SwiftUI
+import ImageIO
+import VideoStitchingCore
 
 @MainActor
 @Observable
 final class StitchingSession {
+    var workflow: AppWorkflow = .screenshots
     var pickerItems: [PhotosPickerItem] = []
     var screenshots: [SelectedScreenshot] = []
     var path: [AppRoute] = []
@@ -17,6 +20,11 @@ final class StitchingSession {
     var message: UserMessage?
     var shareItem: ShareItem?
     var algorithm: AppStitchAlgorithm = .ekibun
+    var videoImages: [VideoStitchImage] = []
+    var selectedVideoImage = 0
+    var videoWarnings: [String] = []
+    var videoIsPartial = false
+    private var videoOutputDirectory: URL?
 
     private let stitcher: ImageStitcher
     private let exporter: ExportService
@@ -116,6 +124,62 @@ final class StitchingSession {
         croppedPreview = ImageCropper.crop(artifact.preview, to: normalized) ?? artifact.preview
     }
 
+    func showVideoResult(_ result: VideoStitchResult, algorithm: String, directory: URL) throws {
+        guard let first = result.images.first else { throw VideoStitchError.processingFailed("录屏未能生成可用长图。") }
+        // Validate and load a bounded thumbnail before taking ownership of output files.
+        let initial = try videoArtifact(first, algorithm: algorithm)
+        clearOutput()
+        videoOutputDirectory = directory
+        videoImages = result.images
+        selectedVideoImage = 0
+        videoWarnings = result.warnings
+        videoIsPartial = result.isPartial
+        artifact = initial
+        crop = .full
+        croppedPreview = initial.preview
+        path.append(.result)
+    }
+
+    func selectVideoImage(_ index: Int) {
+        guard videoImages.indices.contains(index), !isExporting else { return }
+        do {
+            let next = try videoArtifact(videoImages[index], algorithm: artifact?.algorithmName ?? "视频转长截图")
+            selectedVideoImage = index
+            artifact = next
+            crop = .full
+            croppedPreview = next.preview
+        } catch {
+            message = UserMessage(title: "无法读取片段", message: error.localizedDescription)
+        }
+    }
+
+    private func videoArtifact(_ image: VideoStitchImage, algorithm: String) throws -> StitchArtifact {
+        guard image.width > 0, image.height > 0,
+              let source = CGImageSourceCreateWithURL(image.url as CFURL, [kCGImageSourceShouldCache: false] as CFDictionary) else {
+            throw StitchingError.invalidImage
+        }
+        let width = Double(image.width), height = Double(image.height)
+        let scale = min(1, min(900 / width, sqrt(2_000_000 / (width * height))))
+        let maxSize = max(1, Int((max(width, height) * scale).rounded()))
+        let options: [CFString: Any] = [kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceCreateThumbnailWithTransform: true, kCGImageSourceThumbnailMaxPixelSize: maxSize]
+        guard let preview = CGImageSourceCreateThumbnailAtIndex(source, 0, options as CFDictionary) else {
+            throw StitchingError.invalidImage
+        }
+        return StitchArtifact(pngURL: image.url, preview: UIImage(cgImage: preview),
+            pixelSize: CGSize(width: image.width, height: image.height), seams: [], algorithmName: algorithm)
+    }
+
+    private func clearOutput() {
+        if let directory = videoOutputDirectory { try? FileManager.default.removeItem(at: directory) }
+        else if let artifact { try? FileManager.default.removeItem(at: artifact.pngURL) }
+        videoOutputDirectory = nil
+        videoImages = []
+        videoWarnings = []
+        videoIsPartial = false
+        selectedVideoImage = 0
+    }
+
     func saveToPhotos() async {
         guard let artifact else { return }
         isExporting = true
@@ -156,12 +220,14 @@ final class StitchingSession {
     }
 
     func startOver() {
-        if let artifact { try? FileManager.default.removeItem(at: artifact.pngURL) }
+        clearOutput()
         artifact = nil
         crop = .full
         croppedPreview = nil
-        pickerItems = []
-        screenshots = []
+        if workflow == .screenshots {
+            pickerItems = []
+            screenshots = []
+        }
         path = []
     }
 

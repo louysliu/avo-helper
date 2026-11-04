@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E3BFB46CCC1B2F8A4654FCA /* VideoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D8B828F59EA62EC305A62A /* VideoModels.swift */; };
 		232E78B7A0921B6831E65752 /* ExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E002A9905D8E9B61B1229E /* ExportService.swift */; };
+		27136478781D956266A3129F /* VideoSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA647DA258F84AC39EF1E1E6 /* VideoSelectionView.swift */; };
 		407FC0B9E8BB2AA08D75D18C /* ImageCropperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EFC91C350472F7398705FF /* ImageCropperTests.swift */; };
 		4FF3B5EBD6BD4811DEF53BED /* AvoHelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B0EA3E3C6D2D50E8AB6BE /* AvoHelperApp.swift */; };
 		5853878892238AD192E7C82B /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1C55E9333E851E043A470E /* ResultView.swift */; };
@@ -15,17 +17,23 @@
 		693C9DF3DD16A7C2A91C46B0 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE8A261CBBE4B9ADE7F098 /* ShareSheet.swift */; };
 		6D90CBA66C98FBD522668146 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636477EB38C80AD4D5388015 /* SelectionView.swift */; };
 		746817218FD2B0D5390D0C56 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E39F992D4213D01050AE06B /* RootView.swift */; };
-		8806E005E701E624F0BE1DD3 /* StitchingEngines in Frameworks */ = {isa = PBXBuildFile; productRef = F5A6273866170AC830E944CF /* StitchingEngines */; };
+		8806E005E701E624F0BE1DD3 /* VideoStitchingCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6753D2004216369DEC662905 /* VideoStitchingCore */; };
 		898E4EB8376BD1622E96B89C /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A70BB897049A7998854728 /* ImageCropper.swift */; };
 		96E6609E4E7EC157FFD2C227 /* ImageStitcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7F2EFE4FBC925ED66A769D /* ImageStitcherTests.swift */; };
+		A006260933AE2196B2204E2B /* LongScreenVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 318224A701A251FB3673BD36 /* LongScreenVideo */; };
 		A33A6EA14A55A8B0953B833F /* CropEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DCA62DBA1A3FB920466A2 /* CropEditorView.swift */; };
 		A3601A51C1CD4FBAB9E9769D /* CropGeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F74D28A05903BDE41D84D1 /* CropGeometryTests.swift */; };
 		BA0D6FFBE82DD0B3803E3209 /* StitchingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557B9F0479D0B4F7D093BCA /* StitchingModels.swift */; };
+		C16C21FF580F9518E1964C15 /* VideoResultLifecycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CE8371BDA4540ED43A5005 /* VideoResultLifecycleTests.swift */; };
 		C98D11D16566BEC46AF25E6F /* PortedImageStitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999E2FEF1B43CF90AE4DA828 /* PortedImageStitcher.swift */; };
+		D572FBFC07C08949612E79F9 /* VideoThirdPartyNotices.txt in Resources */ = {isa = PBXBuildFile; fileRef = B61B4E73B39E7D8644EF5955 /* VideoThirdPartyNotices.txt */; };
 		E3DC1E96E65A28B5ACE3D605 /* PortedImageStitcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC197EB24FA9325CB2A88982 /* PortedImageStitcherTests.swift */; };
+		E4F8FF29D7A6C08979C86589 /* VideoStitchingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8759BF6D9713D9D233E6F2F6 /* VideoStitchingSession.swift */; };
 		EAA106A4449BA2587B4E72DE /* ImageStitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D601EF7FE644957E632D6 /* ImageStitcher.swift */; };
+		EF78E767D7FCB6C2C7204DAF /* HyprLongshotVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 3B5B05F044D4F5E70141D5F0 /* HyprLongshotVideo */; };
 		F0D22F63C82EB107C9A236A8 /* StitchingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D77A1EB4406F93E6041182 /* StitchingSession.swift */; };
 		F37C532E277DB77D4D29692C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48BDBD28923BE82561EDC1C8 /* Assets.xcassets */; };
+		FC77217D877F64B7FD3B1208 /* StitchingEngines in Frameworks */ = {isa = PBXBuildFile; productRef = F5A6273866170AC830E944CF /* StitchingEngines */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +66,8 @@
 		6E7B0EA3E3C6D2D50E8AB6BE /* AvoHelperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoHelperApp.swift; sourceTree = "<group>"; };
 		70F74D28A05903BDE41D84D1 /* CropGeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropGeometryTests.swift; sourceTree = "<group>"; };
 		86D77A1EB4406F93E6041182 /* StitchingSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchingSession.swift; sourceTree = "<group>"; };
+		86D8B828F59EA62EC305A62A /* VideoModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModels.swift; sourceTree = "<group>"; };
+		8759BF6D9713D9D233E6F2F6 /* VideoStitchingSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStitchingSession.swift; sourceTree = "<group>"; };
 		8A05ED28DF2EDE6F717A85DD /* StitchingKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StitchingKit; path = Packages/StitchingKit; sourceTree = SOURCE_ROOT; };
 		999E2FEF1B43CF90AE4DA828 /* PortedImageStitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortedImageStitcher.swift; sourceTree = "<group>"; };
 		A67A80186E96EDF0D8B19E81 /* AvoHelperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoHelperUITests.swift; sourceTree = "<group>"; };
@@ -66,8 +76,12 @@
 		AFCE8A261CBBE4B9ADE7F098 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		B557B9F0479D0B4F7D093BCA /* StitchingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchingModels.swift; sourceTree = "<group>"; };
 		B5DD51C2A2AC8203F6EF6B3D /* AvoHelperTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = AvoHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B61B4E73B39E7D8644EF5955 /* VideoThirdPartyNotices.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = VideoThirdPartyNotices.txt; sourceTree = "<group>"; };
+		BA647DA258F84AC39EF1E1E6 /* VideoSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSelectionView.swift; sourceTree = "<group>"; };
 		C08D601EF7FE644957E632D6 /* ImageStitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStitcher.swift; sourceTree = "<group>"; };
 		C1A70BB897049A7998854728 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
+		D3CE8371BDA4540ED43A5005 /* VideoResultLifecycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoResultLifecycleTests.swift; sourceTree = "<group>"; };
+		DF2390C744C9E24F99A92A2E /* VideoStitchingKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = VideoStitchingKit; path = Packages/VideoStitchingKit; sourceTree = SOURCE_ROOT; };
 		FDE4BD58A29AE00538682344 /* AvoHelper.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AvoHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -76,7 +90,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8806E005E701E624F0BE1DD3 /* StitchingEngines in Frameworks */,
+				8806E005E701E624F0BE1DD3 /* VideoStitchingCore in Frameworks */,
+				A006260933AE2196B2204E2B /* LongScreenVideo in Frameworks */,
+				EF78E767D7FCB6C2C7204DAF /* HyprLongshotVideo in Frameworks */,
+				FC77217D877F64B7FD3B1208 /* StitchingEngines in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +107,7 @@
 				69EFC91C350472F7398705FF /* ImageCropperTests.swift */,
 				4D7F2EFE4FBC925ED66A769D /* ImageStitcherTests.swift */,
 				AC197EB24FA9325CB2A88982 /* PortedImageStitcherTests.swift */,
+				D3CE8371BDA4540ED43A5005 /* VideoResultLifecycleTests.swift */,
 			);
 			path = AvoHelperTests;
 			sourceTree = "<group>";
@@ -111,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				86D77A1EB4406F93E6041182 /* StitchingSession.swift */,
+				8759BF6D9713D9D233E6F2F6 /* VideoStitchingSession.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -138,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				B557B9F0479D0B4F7D093BCA /* StitchingModels.swift */,
+				86D8B828F59EA62EC305A62A /* VideoModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -147,6 +167,7 @@
 			children = (
 				48BDBD28923BE82561EDC1C8 /* Assets.xcassets */,
 				0664A229B126C800C37A17AF /* Info.plist */,
+				B61B4E73B39E7D8644EF5955 /* VideoThirdPartyNotices.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -155,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				8A05ED28DF2EDE6F717A85DD /* StitchingKit */,
+				DF2390C744C9E24F99A92A2E /* VideoStitchingKit */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -167,6 +189,7 @@
 				4E39F992D4213D01050AE06B /* RootView.swift */,
 				636477EB38C80AD4D5388015 /* SelectionView.swift */,
 				AFCE8A261CBBE4B9ADE7F098 /* ShareSheet.swift */,
+				BA647DA258F84AC39EF1E1E6 /* VideoSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,6 +232,9 @@
 			);
 			name = AvoHelper;
 			packageProductDependencies = (
+				6753D2004216369DEC662905 /* VideoStitchingCore */,
+				318224A701A251FB3673BD36 /* LongScreenVideo */,
+				3B5B05F044D4F5E70141D5F0 /* HyprLongshotVideo */,
 				F5A6273866170AC830E944CF /* StitchingEngines */,
 			);
 			productName = AvoHelper;
@@ -279,6 +305,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				2229577D7688761FB284FD5A /* XCLocalSwiftPackageReference "Packages/StitchingKit" */,
+				D0D3D526403FA3674E2CB2E8 /* XCLocalSwiftPackageReference "Packages/VideoStitchingKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ED78975A87651C1BB2976415 /* Products */;
@@ -298,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F37C532E277DB77D4D29692C /* Assets.xcassets in Resources */,
+				D572FBFC07C08949612E79F9 /* VideoThirdPartyNotices.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +348,9 @@
 				693C9DF3DD16A7C2A91C46B0 /* ShareSheet.swift in Sources */,
 				BA0D6FFBE82DD0B3803E3209 /* StitchingModels.swift in Sources */,
 				F0D22F63C82EB107C9A236A8 /* StitchingSession.swift in Sources */,
+				1E3BFB46CCC1B2F8A4654FCA /* VideoModels.swift in Sources */,
+				27136478781D956266A3129F /* VideoSelectionView.swift in Sources */,
+				E4F8FF29D7A6C08979C86589 /* VideoStitchingSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +370,7 @@
 				407FC0B9E8BB2AA08D75D18C /* ImageCropperTests.swift in Sources */,
 				96E6609E4E7EC157FFD2C227 /* ImageStitcherTests.swift in Sources */,
 				E3DC1E96E65A28B5ACE3D605 /* PortedImageStitcherTests.swift in Sources */,
+				C16C21FF580F9518E1964C15 /* VideoResultLifecycleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +432,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -430,6 +463,8 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -633,9 +668,25 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/StitchingKit;
 		};
+		D0D3D526403FA3674E2CB2E8 /* XCLocalSwiftPackageReference "Packages/VideoStitchingKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/VideoStitchingKit;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		318224A701A251FB3673BD36 /* LongScreenVideo */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LongScreenVideo;
+		};
+		3B5B05F044D4F5E70141D5F0 /* HyprLongshotVideo */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HyprLongshotVideo;
+		};
+		6753D2004216369DEC662905 /* VideoStitchingCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VideoStitchingCore;
+		};
 		F5A6273866170AC830E944CF /* StitchingEngines */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = StitchingEngines;
