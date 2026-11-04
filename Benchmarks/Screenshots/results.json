@@ -1,0 +1,1470 @@
+[
+  {
+    "analysisMilliseconds" : 202.24145834799856,
+    "compositionMilliseconds" : 5.029291671235114,
+    "engine" : "ekibun",
+    "group" : "1",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "1-1.HEIC",
+        "sha256" : "106333bf1310fc22441584d080b17ad63482a135cb841bcac7e5273597d6ec63",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-2.HEIC",
+        "sha256" : "2a1fd2c4ce1119fbb6229438d5db56fa9c99345ae9d28b99f18256148fc425d0",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-3.HEIC",
+        "sha256" : "9b55c2b968bdb3e8a119cbd750a6c147b127db4498b6d9423aabebbe979c6e03",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-4.HEIC",
+        "sha256" : "e4a97724935df3c8ad56b39a4af507f86ceffbcaaff6fde4c3b1011f9b525397",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 7762,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0.6056908873261136,
+          "diagnostic" : "Diff phase correlation peak=0.23118239403513502, RGB error=8.107311241328214, sampling=3",
+          "offsetX" : 0,
+          "offsetY" : 1054,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0.32131992827105066,
+          "diagnostic" : "Diff phase correlation peak=0.1325746066315877, RGB error=12.294584380717865, sampling=3",
+          "offsetX" : 0,
+          "offsetY" : 1464,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "No phase-correlation peak",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "ekibun",
+      "notes" : [
+        "Ekibun phase correlation with difference-masked Laplacian; full frame bounds as upstream. Homography mode is not ported."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 1840,
+        "overlap" : 1568,
+        "secondIndex" : 1,
+        "sourceY" : 786,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 3111,
+        "overlap" : 1158,
+        "secondIndex" : 2,
+        "sourceY" : 593,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 2,
+        "outputY" : 5140,
+        "overlap" : 0,
+        "secondIndex" : 3,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 166.79874999681488,
+    "compositionMilliseconds" : 6.350083334837109,
+    "engine" : "longstitch",
+    "group" : "1",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "1-1.HEIC",
+        "sha256" : "106333bf1310fc22441584d080b17ad63482a135cb841bcac7e5273597d6ec63",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-2.HEIC",
+        "sha256" : "2a1fd2c4ce1119fbb6229438d5db56fa9c99345ae9d28b99f18256148fc425d0",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-3.HEIC",
+        "sha256" : "9b55c2b968bdb3e8a119cbd750a6c147b127db4498b6d9423aabebbe979c6e03",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-4.HEIC",
+        "sha256" : "e4a97724935df3c8ad56b39a4af507f86ceffbcaaff6fde4c3b1011f9b525397",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 8506,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0.98,
+          "diagnostic" : "exact; run=95; fixed=175,0",
+          "offsetX" : 0,
+          "offsetY" : 640,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "Upstream exact matcher located zero shift (run=262), but pixels differ; session refresh is not representable by this pair plan",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "No credible row-run or unambiguous brightness overlap",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 175
+        },
+        {
+          "bottom" : 2622,
+          "top" : 175
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "longstitch",
+      "notes" : [
+        "jietuba session matcher, adjacent-frame adapter; vertical translation only",
+        "Confidence values label matching paths, not calibrated probabilities"
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 1773,
+        "overlap" : 1807,
+        "secondIndex" : 1,
+        "sourceY" : 1133,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 3262,
+        "overlap" : 0,
+        "secondIndex" : 2,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 2,
+        "outputY" : 5884,
+        "overlap" : 0,
+        "secondIndex" : 3,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 246.46929165464826,
+    "compositionMilliseconds" : 11.748833319870755,
+    "engine" : "zoomit",
+    "group" : "1",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "1-1.HEIC",
+        "sha256" : "106333bf1310fc22441584d080b17ad63482a135cb841bcac7e5273597d6ec63",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-2.HEIC",
+        "sha256" : "2a1fd2c4ce1119fbb6229438d5db56fa9c99345ae9d28b99f18256148fc425d0",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-3.HEIC",
+        "sha256" : "9b55c2b968bdb3e8a119cbd750a6c147b127db4498b6d9423aabebbe979c6e03",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-4.HEIC",
+        "sha256" : "e4a97724935df3c8ad56b39a4af507f86ceffbcaaff6fde4c3b1011f9b525397",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 10488,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0,
+          "diagnostic" : "ZoomIt upstream original-resolution findShift returned nil",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "ZoomIt upstream original-resolution findShift returned nil",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "ZoomIt upstream original-resolution findShift returned nil",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "zoomit",
+      "notes" : [
+        "Microsoft Zoomit-Mac design port; independent adjacent pairs, no capture-frame dropping or momentum assumptions.",
+        "Stationary header\/footer row masks; Windows five-frame fixed-overlay mask is not ported."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2622,
+        "overlap" : 0,
+        "secondIndex" : 1,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 5244,
+        "overlap" : 0,
+        "secondIndex" : 2,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 2,
+        "outputY" : 7866,
+        "overlap" : 0,
+        "secondIndex" : 3,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 170.05662497831509,
+    "compositionMilliseconds" : 3.848291642498225,
+    "engine" : "seamly",
+    "group" : "1",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "1-1.HEIC",
+        "sha256" : "106333bf1310fc22441584d080b17ad63482a135cb841bcac7e5273597d6ec63",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-2.HEIC",
+        "sha256" : "2a1fd2c4ce1119fbb6229438d5db56fa9c99345ae9d28b99f18256148fc425d0",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-3.HEIC",
+        "sha256" : "9b55c2b968bdb3e8a119cbd750a6c147b127db4498b6d9423aabebbe979c6e03",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "1-4.HEIC",
+        "sha256" : "e4a97724935df3c8ad56b39a4af507f86ceffbcaaff6fde4c3b1011f9b525397",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 6762,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0.6133562326431274,
+          "diagnostic" : "Seamly tile-consensus; full-height refinement; lowConfidence=false; observedHorizontalDrift=0",
+          "offsetX" : 0,
+          "offsetY" : 1054,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0.6243354380130768,
+          "diagnostic" : "Seamly tile-consensus; full-height refinement; lowConfidence=true; observedHorizontalDrift=0",
+          "offsetX" : 0,
+          "offsetY" : 1463,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0.8622252941131592,
+          "diagnostic" : "Seamly tile-consensus; full-height refinement; lowConfidence=false; observedHorizontalDrift=0",
+          "offsetX" : 0,
+          "offsetY" : 1623,
+          "status" : "matched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2322,
+          "top" : 87
+        },
+        {
+          "bottom" : 2322,
+          "top" : 87
+        },
+        {
+          "bottom" : 2322,
+          "top" : 87
+        },
+        {
+          "bottom" : 2322,
+          "top" : 87
+        }
+      ],
+      "engineID" : "seamly",
+      "notes" : [
+        "Seamly offline defaults, input order, no frame selection; upstream license unresolved."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 1755,
+        "overlap" : 1181,
+        "secondIndex" : 1,
+        "sourceY" : 701,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 3088,
+        "overlap" : 772,
+        "secondIndex" : 2,
+        "sourceY" : 571,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 2,
+        "outputY" : 4701,
+        "overlap" : 612,
+        "secondIndex" : 3,
+        "sourceY" : 561,
+        "status" : "matched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 310.6619583268184,
+    "compositionMilliseconds" : 2.9080416716169566,
+    "engine" : "ekibun",
+    "group" : "2",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "2-1.HEIC",
+        "sha256" : "515b3c1f88a3d9e85d4ad0da7bae09682093843fd32b677b8ccf62a179b0b1ba",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-2.HEIC",
+        "sha256" : "347a0300e7b637755ec986e741043fd6dacf5395c88258036b9198bdac18c95f",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-3.HEIC",
+        "sha256" : "36eef1bb8a5a49cfa43ccc6e836f132beb1c665fd8103e6736ab7d792a34c840",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-4.HEIC",
+        "sha256" : "d7d6f665f5a71c6edcb710029eab1cae404760bb979dd457c780a0cb9179e1d6",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 6392,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0.344102385523852,
+          "diagnostic" : "Diff phase correlation peak=0.18410122150687386, RGB error=24.126006600660066, sampling=3",
+          "offsetX" : 0,
+          "offsetY" : 1225,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0.07011627487754855,
+          "diagnostic" : "Diff phase correlation peak=0.042323982336638755, RGB error=28.658007553332652, sampling=3",
+          "offsetX" : 0,
+          "offsetY" : 1462,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0.6780946472237898,
+          "diagnostic" : "Diff phase correlation peak=0.3575167141306034, RGB error=20.601942577677455, sampling=3",
+          "offsetX" : 0,
+          "offsetY" : 1083,
+          "status" : "matched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "ekibun",
+      "notes" : [
+        "Ekibun phase correlation with difference-masked Laplacian; full frame bounds as upstream. Homography mode is not ported."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 1925,
+        "overlap" : 1397,
+        "secondIndex" : 1,
+        "sourceY" : 700,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 3266,
+        "overlap" : 1160,
+        "secondIndex" : 2,
+        "sourceY" : 579,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 2,
+        "outputY" : 4556,
+        "overlap" : 1539,
+        "secondIndex" : 3,
+        "sourceY" : 786,
+        "status" : "matched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 44.73516665166244,
+    "compositionMilliseconds" : 2.6784583169501275,
+    "engine" : "longstitch",
+    "group" : "2",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "2-1.HEIC",
+        "sha256" : "515b3c1f88a3d9e85d4ad0da7bae09682093843fd32b677b8ccf62a179b0b1ba",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-2.HEIC",
+        "sha256" : "347a0300e7b637755ec986e741043fd6dacf5395c88258036b9198bdac18c95f",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-3.HEIC",
+        "sha256" : "36eef1bb8a5a49cfa43ccc6e836f132beb1c665fd8103e6736ab7d792a34c840",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-4.HEIC",
+        "sha256" : "d7d6f665f5a71c6edcb710029eab1cae404760bb979dd457c780a0cb9179e1d6",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 10488,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0,
+          "diagnostic" : "Upstream exact matcher located zero shift (run=169), but pixels differ; session refresh is not representable by this pair plan",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "Upstream exact matcher located zero shift (run=171), but pixels differ; session refresh is not representable by this pair plan",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "Upstream exact matcher located zero shift (run=169), but pixels differ; session refresh is not representable by this pair plan",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "longstitch",
+      "notes" : [
+        "jietuba session matcher, adjacent-frame adapter; vertical translation only",
+        "Confidence values label matching paths, not calibrated probabilities"
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2622,
+        "overlap" : 0,
+        "secondIndex" : 1,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 5244,
+        "overlap" : 0,
+        "secondIndex" : 2,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 2,
+        "outputY" : 7866,
+        "overlap" : 0,
+        "secondIndex" : 3,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 158.49545833771117,
+    "compositionMilliseconds" : 2.5662083353381604,
+    "engine" : "zoomit",
+    "group" : "2",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "2-1.HEIC",
+        "sha256" : "515b3c1f88a3d9e85d4ad0da7bae09682093843fd32b677b8ccf62a179b0b1ba",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-2.HEIC",
+        "sha256" : "347a0300e7b637755ec986e741043fd6dacf5395c88258036b9198bdac18c95f",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-3.HEIC",
+        "sha256" : "36eef1bb8a5a49cfa43ccc6e836f132beb1c665fd8103e6736ab7d792a34c840",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-4.HEIC",
+        "sha256" : "d7d6f665f5a71c6edcb710029eab1cae404760bb979dd457c780a0cb9179e1d6",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 10488,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0,
+          "diagnostic" : "ZoomIt upstream original-resolution findShift returned nil",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "ZoomIt upstream original-resolution findShift returned nil",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "ZoomIt upstream original-resolution findShift returned nil",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "zoomit",
+      "notes" : [
+        "Microsoft Zoomit-Mac design port; independent adjacent pairs, no capture-frame dropping or momentum assumptions.",
+        "Stationary header\/footer row masks; Windows five-frame fixed-overlay mask is not ported."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2622,
+        "overlap" : 0,
+        "secondIndex" : 1,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 5244,
+        "overlap" : 0,
+        "secondIndex" : 2,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 2,
+        "outputY" : 7866,
+        "overlap" : 0,
+        "secondIndex" : 3,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 184.16350000188686,
+    "compositionMilliseconds" : 3.059374983422458,
+    "engine" : "seamly",
+    "group" : "2",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "2-1.HEIC",
+        "sha256" : "515b3c1f88a3d9e85d4ad0da7bae09682093843fd32b677b8ccf62a179b0b1ba",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-2.HEIC",
+        "sha256" : "347a0300e7b637755ec986e741043fd6dacf5395c88258036b9198bdac18c95f",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-3.HEIC",
+        "sha256" : "36eef1bb8a5a49cfa43ccc6e836f132beb1c665fd8103e6736ab7d792a34c840",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "2-4.HEIC",
+        "sha256" : "d7d6f665f5a71c6edcb710029eab1cae404760bb979dd457c780a0cb9179e1d6",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 9091,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0.9435054324567318,
+          "diagnostic" : "Seamly tile-consensus; full-height refinement; lowConfidence=false; observedHorizontalDrift=0",
+          "offsetX" : 0,
+          "offsetY" : 1225,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "Seamly input-order edge gate rejected overlap",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "Seamly input-order edge gate rejected overlap",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2322,
+          "top" : 763
+        },
+        {
+          "bottom" : 2322,
+          "top" : 763
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "seamly",
+      "notes" : [
+        "Seamly offline defaults, input order, no frame selection; upstream license unresolved."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2155,
+        "overlap" : 334,
+        "secondIndex" : 1,
+        "sourceY" : 930,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 3847,
+        "overlap" : 0,
+        "secondIndex" : 2,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 2,
+        "outputY" : 6469,
+        "overlap" : 0,
+        "secondIndex" : 3,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 143.29395833192393,
+    "compositionMilliseconds" : 1.5485000039916486,
+    "engine" : "ekibun",
+    "group" : "3",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "3-1.HEIC",
+        "sha256" : "9811c2addbe5ab32fcd999c8cb6cd267c9a998529a048411291a985a06576a62",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "3-2.HEIC",
+        "sha256" : "03980a1bd8c900cdfa2de9541640e619eb89a4feb0146d0f800fe3e868b43d2c",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 4074,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0.5201537596114039,
+          "diagnostic" : "Diff phase correlation peak=0.23466246630349924, RGB error=16.71244816789371, sampling=3",
+          "offsetX" : 0,
+          "offsetY" : 1452,
+          "status" : "matched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "ekibun",
+      "notes" : [
+        "Ekibun phase correlation with difference-masked Laplacian; full frame bounds as upstream. Homography mode is not ported."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2038,
+        "overlap" : 1170,
+        "secondIndex" : 1,
+        "sourceY" : 586,
+        "status" : "matched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 169.91179165779613,
+    "compositionMilliseconds" : 1.9840833265334368,
+    "engine" : "longstitch",
+    "group" : "3",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "3-1.HEIC",
+        "sha256" : "9811c2addbe5ab32fcd999c8cb6cd267c9a998529a048411291a985a06576a62",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "3-2.HEIC",
+        "sha256" : "03980a1bd8c900cdfa2de9541640e619eb89a4feb0146d0f800fe3e868b43d2c",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 5244,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0,
+          "diagnostic" : "No credible row-run or unambiguous brightness overlap",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "longstitch",
+      "notes" : [
+        "jietuba session matcher, adjacent-frame adapter; vertical translation only",
+        "Confidence values label matching paths, not calibrated probabilities"
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2622,
+        "overlap" : 0,
+        "secondIndex" : 1,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 134.6063333330676,
+    "compositionMilliseconds" : 1.4473333430942148,
+    "engine" : "zoomit",
+    "group" : "3",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "3-1.HEIC",
+        "sha256" : "9811c2addbe5ab32fcd999c8cb6cd267c9a998529a048411291a985a06576a62",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "3-2.HEIC",
+        "sha256" : "03980a1bd8c900cdfa2de9541640e619eb89a4feb0146d0f800fe3e868b43d2c",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 3004,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0.3492753852816597,
+          "diagnostic" : "ZoomIt upstream original-resolution findShift, SAD=20.823, static=0\/42",
+          "offsetX" : 0,
+          "offsetY" : 382,
+          "status" : "matched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2580,
+          "top" : 0
+        },
+        {
+          "bottom" : 2580,
+          "top" : 0
+        }
+      ],
+      "engineID" : "zoomit",
+      "notes" : [
+        "Microsoft Zoomit-Mac design port; independent adjacent pairs, no capture-frame dropping or momentum assumptions.",
+        "Stationary header\/footer row masks; Windows five-frame fixed-overlay mask is not ported."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 1525,
+        "overlap" : 2198,
+        "secondIndex" : 1,
+        "sourceY" : 1143,
+        "status" : "matched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 89.20695833512582,
+    "compositionMilliseconds" : 1.4303333300631493,
+    "engine" : "seamly",
+    "group" : "3",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "3-1.HEIC",
+        "sha256" : "9811c2addbe5ab32fcd999c8cb6cd267c9a998529a048411291a985a06576a62",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "3-2.HEIC",
+        "sha256" : "03980a1bd8c900cdfa2de9541640e619eb89a4feb0146d0f800fe3e868b43d2c",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 5244,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0,
+          "diagnostic" : "Seamly input-order edge gate rejected overlap",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "seamly",
+      "notes" : [
+        "Seamly offline defaults, input order, no frame selection; upstream license unresolved."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2622,
+        "overlap" : 0,
+        "secondIndex" : 1,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 299.83479165821336,
+    "compositionMilliseconds" : 7.706500007770956,
+    "engine" : "ekibun",
+    "group" : "4",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "4-1.HEIC",
+        "sha256" : "bb05bc2087ff385f937c0ef9187c7b4c85d438d637f3c958d68c83ffd1470891",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "4-2.HEIC",
+        "sha256" : "0cd6974a2d668e9ffa12e57f1073c5e8252f81567403f008ce7f02dddd02b39c",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "4-3.HEIC",
+        "sha256" : "231610b01c59f7b6c0528b88ce3bfd52ab8a31827db87d9388cf20e62a770c38",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 5091,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0.3839796283102826,
+          "diagnostic" : "Diff phase correlation peak=0.17523001367256466, RGB error=17.252498060865996, sampling=3",
+          "offsetX" : 0,
+          "offsetY" : 1541,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0.776892813458993,
+          "diagnostic" : "Diff phase correlation peak=0.3078950544930378, RGB error=10.170901052369388, sampling=3",
+          "offsetX" : 0,
+          "offsetY" : 928,
+          "status" : "matched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "ekibun",
+      "notes" : [
+        "Ekibun phase correlation with difference-masked Laplacian; full frame bounds as upstream. Homography mode is not ported."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2081,
+        "overlap" : 1081,
+        "secondIndex" : 1,
+        "sourceY" : 540,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 3321,
+        "overlap" : 1694,
+        "secondIndex" : 2,
+        "sourceY" : 852,
+        "status" : "matched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 145.4575000097975,
+    "compositionMilliseconds" : 2.427875006105751,
+    "engine" : "longstitch",
+    "group" : "4",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "4-1.HEIC",
+        "sha256" : "bb05bc2087ff385f937c0ef9187c7b4c85d438d637f3c958d68c83ffd1470891",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "4-2.HEIC",
+        "sha256" : "0cd6974a2d668e9ffa12e57f1073c5e8252f81567403f008ce7f02dddd02b39c",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "4-3.HEIC",
+        "sha256" : "231610b01c59f7b6c0528b88ce3bfd52ab8a31827db87d9388cf20e62a770c38",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 6172,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0,
+          "diagnostic" : "No credible row-run or unambiguous brightness overlap",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0.98,
+          "diagnostic" : "exact; run=65; fixed=93,0",
+          "offsetX" : 0,
+          "offsetY" : 928,
+          "status" : "matched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 93
+        },
+        {
+          "bottom" : 2622,
+          "top" : 93
+        }
+      ],
+      "engineID" : "longstitch",
+      "notes" : [
+        "jietuba session matcher, adjacent-frame adapter; vertical translation only",
+        "Confidence values label matching paths, not calibrated probabilities"
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2622,
+        "overlap" : 0,
+        "secondIndex" : 1,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 4447,
+        "overlap" : 1601,
+        "secondIndex" : 2,
+        "sourceY" : 897,
+        "status" : "matched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 171.06479167705402,
+    "compositionMilliseconds" : 2.6634583191480488,
+    "engine" : "zoomit",
+    "group" : "4",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "4-1.HEIC",
+        "sha256" : "bb05bc2087ff385f937c0ef9187c7b4c85d438d637f3c958d68c83ffd1470891",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "4-2.HEIC",
+        "sha256" : "0cd6974a2d668e9ffa12e57f1073c5e8252f81567403f008ce7f02dddd02b39c",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "4-3.HEIC",
+        "sha256" : "231610b01c59f7b6c0528b88ce3bfd52ab8a31827db87d9388cf20e62a770c38",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 4223,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0.3375459321649016,
+          "diagnostic" : "ZoomIt upstream original-resolution findShift, SAD=21.199, static=0\/0",
+          "offsetX" : 0,
+          "offsetY" : 695,
+          "status" : "matched"
+        },
+        {
+          "confidence" : 0.36444721084409126,
+          "diagnostic" : "ZoomIt upstream original-resolution findShift, SAD=20.338, static=0\/18",
+          "offsetX" : 0,
+          "offsetY" : 906,
+          "status" : "matched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2604,
+          "top" : 0
+        },
+        {
+          "bottom" : 2604,
+          "top" : 0
+        }
+      ],
+      "engineID" : "zoomit",
+      "notes" : [
+        "Microsoft Zoomit-Mac design port; independent adjacent pairs, no capture-frame dropping or momentum assumptions.",
+        "Stationary header\/footer row masks; Windows five-frame fixed-overlay mask is not ported."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 1686,
+        "overlap" : 1927,
+        "secondIndex" : 1,
+        "sourceY" : 991,
+        "status" : "matched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 2490,
+        "overlap" : 1698,
+        "secondIndex" : 2,
+        "sourceY" : 889,
+        "status" : "matched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  },
+  {
+    "analysisMilliseconds" : 128.6216666630935,
+    "compositionMilliseconds" : 2.0372916478663683,
+    "engine" : "seamly",
+    "group" : "4",
+    "inputs" : [
+      {
+        "height" : 2622,
+        "name" : "4-1.HEIC",
+        "sha256" : "bb05bc2087ff385f937c0ef9187c7b4c85d438d637f3c958d68c83ffd1470891",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "4-2.HEIC",
+        "sha256" : "0cd6974a2d668e9ffa12e57f1073c5e8252f81567403f008ce7f02dddd02b39c",
+        "width" : 1206
+      },
+      {
+        "height" : 2622,
+        "name" : "4-3.HEIC",
+        "sha256" : "231610b01c59f7b6c0528b88ce3bfd52ab8a31827db87d9388cf20e62a770c38",
+        "width" : 1206
+      }
+    ],
+    "outputHeight" : 7866,
+    "outputWidth" : 1206,
+    "plan" : {
+      "alignments" : [
+        {
+          "confidence" : 0,
+          "diagnostic" : "Seamly input-order edge gate rejected overlap",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        },
+        {
+          "confidence" : 0,
+          "diagnostic" : "Seamly input-order edge gate rejected overlap",
+          "offsetX" : 0,
+          "offsetY" : 0,
+          "status" : "unmatched"
+        }
+      ],
+      "bounds" : [
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        },
+        {
+          "bottom" : 2622,
+          "top" : 0
+        }
+      ],
+      "engineID" : "seamly",
+      "notes" : [
+        "Seamly offline defaults, input order, no frame selection; upstream license unresolved."
+      ]
+    },
+    "seams" : [
+      {
+        "firstIndex" : 0,
+        "outputY" : 2622,
+        "overlap" : 0,
+        "secondIndex" : 1,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      },
+      {
+        "firstIndex" : 1,
+        "outputY" : 5244,
+        "overlap" : 0,
+        "secondIndex" : 2,
+        "sourceY" : 0,
+        "status" : "unmatched"
+      }
+    ],
+    "warnings" : [
+
+    ]
+  }
+]

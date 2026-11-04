@@ -1,0 +1,554 @@
+// Derived from LiLiKazine/Seamly.app @ ed371adfc13151f95c95b6e3e8e3ff8790075d8d.
+// Local experimental use; upstream license unresolved. See Ports/Seamly/README.md.
+import CoreGraphics
+import Accelerate
+import Foundation
+
+/// Assembles saved keyframes plus their manifest into the final long image.
+///
+/// For each seam it snaps the extension's provisional offset to pixel precision with a
+/// small full-resolution local search, then draws the first frame with its top chrome,
+/// each subsequent frame's newly-revealed content via a hard cut (no feathering — the
+/// overlapping pixels are identical), and the last frame's bottom chrome. Output is a
+/// `CGImage` (raster) or an incrementally-drawn `CGContext` PDF, in the source color space.
+public struct Compositor: Sendable {
+    public enum CompositorError: Error, Equatable {
+        case noKeyframes
+        case contextFailure
+    }
+
+    private let matcher: OffsetMatcher
+    private let profiler: VerticalProfile
+    /// ± pixels searched around each provisional offset during refinement.
+    public let refinementDelta: Int
+    /// Refined-match confidence below which we keep the provisional offset.
+    public let refinementConfidence: Double
+    /// Marker band height (px) drawn between segments in the raster path.
+    public let separatorHeight: Int
+    /// Max page height (points) for the PDF path before paginating.
+    public let pdfPageHeightLimit: Int
+
+    public init(
+        matcher: OffsetMatcher = OffsetMatcher(minimumOverlap: 8, aggregation: .tileConsensus),
+        profiler: VerticalProfile = VerticalProfile(targetWidth: 64),
+        refinementDelta: Int = 6,
+        refinementConfidence: Double = 0.3,
+        separatorHeight: Int = 8,
+        pdfPageHeightLimit: Int = 14_400
+    ) {
+        self.matcher = matcher
+        self.profiler = profiler
+        self.refinementDelta = refinementDelta
+        self.refinementConfidence = refinementConfidence
+        self.separatorHeight = separatorHeight
+        self.pdfPageHeightLimit = pdfPageHeightLimit
+    }
+
+    // MARK: - Public API
+
+    /// Snap each seam's provisional offset to pixel precision, and flag seams with a
+    /// nonzero horizontal component or a low-confidence vertical match.
+    ///
+    /// Refinement matches with each frame's resolved chrome **masked out**, the same restriction
+    /// `BatchStitcher` applies to its own matching. This was the last matching path that scored
+    /// chrome rows as if they were content.
+    ///
+    /// Measured on `youtube-*` (660×1434, half-res, chrome 115/124), refined `dy` against a
+    /// full-width brute-force MAD over the visible content rows:
+    ///
+    /// | pair | truth | unmasked | masked |
+    /// |------|-------|----------|--------|
+    /// | 0-1  | 744   | 744 @ 0.74 | 744 @ 0.95 |
+    /// | 1-2  | 716†  | 716 @ 0.57 | 717 @ 0.79 |
+    /// | 2-3  | 726   | 726 @ 0.70 | 726 @ 0.95 |
+    /// | 3-4  | 755†  | **754** @ 0.16 | 755 @ 0.73 |
+    /// | 4-5  | 721   | 721 @ 0.47 | 721 @ 0.98 |
+    ///
+    /// († sub-pixel: these two pairs are 1433/2 and 1509/2 at full resolution, so 716.5 and
+    /// 754.5 — no integer answer exists and the brute-force costs are a near tie. The three
+    /// pairs with an exact integer truth are pixel-exact either way.)
+    ///
+    /// The win is **confidence**, not the argmin: masking roughly doubles the score valley's
+    /// depth, and the worst pair goes 0.16 → 0.73. That matters because a match scoring below
+    /// `refinementConfidence` is discarded and the coarse provisional kept, so before this the
+    /// hardest seam — the one that most needed refining — was the one that never got refined.
+    ///
+    /// Deliberately **not** done: widening `VerticalProfile.targetWidth` for refinement, which
+    /// issue #9 proposed as the fix. Measured at 64, 128, 256, 512 and full 660 columns, every
+    /// pair returned an identical `dy` and a confidence differing by ≤0.01. The 1px discrepancy
+    /// is not a horizontal-sampling artifact, so paying ~10x the render cost buys nothing.
+    public func refineSeams(_ session: StitchSession, images: (Keyframe) throws -> CGImage) throws -> [Seam] {
+        let byIndex = Dictionary(uniqueKeysWithValues: session.keyframes.map { ($0.index, $0) })
+        return try session.seams.map { seam in
+            guard let a = byIndex[seam.fromIndex], let b = byIndex[seam.fromIndex + 1] else { return seam }
+            let imgA = try images(a), imgB = try images(b)
+            let rowMasks = RowMaskPair(
+                first: contentRowMask(session.resolvedChrome(for: a), frameHeight: imgA.height),
+                second: contentRowMask(session.resolvedChrome(for: b), frameHeight: imgB.height)
+            )
+            let (dy, confident) = refineVertical(imgA, imgB, provisional: seam.provisionalDy, rowMasks: rowMasks)
+            let dx = measureHorizontal(imgA, imgB, dy: dy)
+            var refined = seam
+            refined.provisionalDy = dy
+            refined.provisionalDx = dx
+            refined.isLowConfidence = seam.isLowConfidence || !confident || abs(dx) >= 2
+            return refined
+        }
+    }
+
+    /// Composite to a single raster `CGImage`.
+    public func composite(_ session: StitchSession, images: (Keyframe) throws -> CGImage) throws -> CGImage {
+        guard !session.keyframes.isEmpty else { throw CompositorError.noKeyframes }
+        let refined = try refineSeams(session, images: images)
+        let layout = try plan(session, refinedSeams: refined, images: images)
+        let colorSpace = try firstImage(session, images).colorSpace ?? CGColorSpace(name: CGColorSpace.sRGB)!
+        let full = try renderRaster(layout.pieces, width: layout.width, height: layout.totalHeight, colorSpace: colorSpace, images: images)
+        return applyTrim(full, top: session.topTrim, bottom: session.bottomTrim)
+    }
+
+    /// Crop the user's global top/bottom trim from a composited image (top-referenced).
+    private func applyTrim(_ image: CGImage, top: Int, bottom: Int) -> CGImage {
+        let t = max(0, top), b = max(0, bottom)
+        let keep = image.height - t - b
+        guard (t > 0 || b > 0), keep > 0 else { return image }
+        // `CGImage.cropping` is top-referenced (y = 0 is the top row), so trimming `top` rows from
+        // the top starts the kept rect at y = top. The rect is provably within bounds (keep > 0,
+        // full width), so `cropping` returns nil only for an impossible input; returning the
+        // untrimmed image is a safe last resort.
+        return image.cropping(to: CGRect(x: 0, y: t, width: image.width, height: keep)) ?? image
+    }
+
+    /// Render a set of pieces (destination Ys relative to the strip top) into one raster.
+    /// The context is *not* flipped: an unflipped bitmap context reproduces a drawn CGImage
+    /// upright and `makeImage()` returns it top-left — the flipped path mirrors it.
+    private func renderRaster(_ pieces: [Piece], width: Int, height: Int, colorSpace: CGColorSpace, images: (Keyframe) throws -> CGImage) throws -> CGImage {
+        guard let ctx = CGContext(
+            data: nil,
+            width: width,
+            height: max(1, height),
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: colorSpace,
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else { throw CompositorError.contextFailure }
+        ctx.interpolationQuality = .none
+        for piece in pieces {
+            try drawStrip(piece, srcRow: piece.srcY, height: piece.height, destY: piece.destY, in: ctx, images: images)
+        }
+        guard let image = ctx.makeImage() else { throw CompositorError.contextFailure }
+        return image
+    }
+
+    /// Composite to a PDF at `url`, drawing keyframe strips incrementally (memory-safe,
+    /// not bound by the GPU texture limit) and paginating past the viewer ceiling.
+    public func writePDF(_ session: StitchSession, images: (Keyframe) throws -> CGImage, to url: URL) throws {
+        guard !session.keyframes.isEmpty else { throw CompositorError.noKeyframes }
+        let refined = try refineSeams(session, images: images)
+        let layout = try plan(session, refinedSeams: refined, images: images)
+
+        let colorSpace = try firstImage(session, images).colorSpace ?? CGColorSpace(name: CGColorSpace.sRGB)!
+        var mediaBox = CGRect(x: 0, y: 0, width: layout.width, height: min(pdfPageHeightLimit, max(1, layout.totalHeight)))
+        guard let consumer = CGDataConsumer(url: url as CFURL),
+              let ctx = CGContext(consumer: consumer, mediaBox: &mediaBox, nil) else {
+            throw CompositorError.contextFailure
+        }
+
+        // Paginate each segment independently; a segment break starts a new page. Each page
+        // is rasterized once (bounded by the page-height limit) then placed into the PDF.
+        for segment in layout.segments {
+            var drawn = 0
+            while drawn < segment.height {
+                let pageHeight = min(pdfPageHeightLimit, segment.height - drawn)
+                let window = drawn..<(drawn + pageHeight)
+                let pagePieces = clip(segment.pieces, to: window)
+                let pageImage = try renderRaster(pagePieces, width: layout.width, height: pageHeight, colorSpace: colorSpace, images: images)
+                var box = CGRect(x: 0, y: 0, width: layout.width, height: pageHeight)
+                ctx.beginPage(mediaBox: &box)
+                ctx.interpolationQuality = .none
+                // PDF space is bottom-left (unlike bitmap readback); flip so the top-left
+                // raster page lands upright in the document.
+                ctx.saveGState()
+                ctx.translateBy(x: 0, y: CGFloat(pageHeight))
+                ctx.scaleBy(x: 1, y: -1)
+                ctx.draw(pageImage, in: CGRect(x: 0, y: 0, width: layout.width, height: pageHeight))
+                ctx.restoreGState()
+                ctx.endPage()
+                drawn += pageHeight
+            }
+        }
+        ctx.closePDF()
+    }
+
+    /// Re-slice segment pieces to a page window, with destination Ys relative to the page.
+    private func clip(_ pieces: [Piece], to window: Range<Int>) -> [Piece] {
+        pieces.compactMap { piece in
+            let lo = max(piece.segmentLocalY, window.lowerBound)
+            let hi = min(piece.segmentLocalY + piece.height, window.upperBound)
+            guard hi > lo else { return nil }
+            return Piece(
+                keyframe: piece.keyframe,
+                srcY: piece.srcY + (lo - piece.segmentLocalY),
+                height: hi - lo,
+                destY: lo - window.lowerBound,
+                segmentLocalY: 0
+            )
+        }
+    }
+
+    /// Where every strip of this session's composite lands. Loads no images, so it is cheap
+    /// enough to compute whenever a session changes.
+    ///
+    /// Uses the session's own stored offsets, which is correct for every app-side caller: the
+    /// draw path is `refinementDelta: 0`, so the manifest is the authority and refinement is
+    /// a no-op. See `StitchAssembler.freezeGeometry`.
+    public func placement(_ session: StitchSession) -> Placement {
+        Placement(spans: layoutSpans(session, dyByFrom: offsets(session.seams)))
+    }
+
+    // MARK: - Layout
+
+    /// One source strip: rows `[srcY, srcY+height)` of a keyframe (or a separator band)
+    /// placed at `destY` in the output. `segmentLocalY` is the destination Y within its
+    /// segment, used by the PDF paginator.
+    struct Piece {
+        var keyframe: Keyframe?          // nil => separator band
+        var srcY: Int
+        var height: Int
+        var destY: Int
+        var segmentLocalY: Int
+    }
+
+    struct SegmentLayout {
+        var pieces: [Piece]
+        var height: Int
+    }
+
+    struct Layout {
+        var pieces: [Piece]
+        var segments: [SegmentLayout]
+        var width: Int
+        var totalHeight: Int
+    }
+
+    private func plan(_ session: StitchSession, refinedSeams: [Seam], images: (Keyframe) throws -> CGImage) throws -> Layout {
+        let spans = layoutSpans(session, dyByFrom: offsets(refinedSeams))
+        let width = try firstImage(session, images).width
+        let byIndex = Dictionary(session.keyframes.map { ($0.index, $0) }, uniquingKeysWith: { first, _ in first })
+
+        var pieces: [Piece] = []
+        var segments = Array(
+            repeating: SegmentLayout(pieces: [], height: 0),
+            count: (spans.map(\.segmentIndex).max() ?? -1) + 1
+        )
+        for span in spans {
+            let piece = Piece(
+                keyframe: span.keyframeIndex.flatMap { byIndex[$0] },
+                srcY: span.srcY,
+                height: span.height,
+                destY: span.destY,
+                segmentLocalY: span.segmentLocalY
+            )
+            pieces.append(piece)
+            // A separator belongs to no segment — it sits between them, and the PDF paginator
+            // must not page it as part of the segment that follows.
+            guard span.keyframeIndex != nil else { continue }
+            segments[span.segmentIndex].pieces.append(piece)
+            segments[span.segmentIndex].height = span.segmentLocalY + span.height
+        }
+
+        return Layout(
+            pieces: pieces,
+            segments: segments,
+            width: width,
+            totalHeight: spans.last.map { $0.destY + $0.height } ?? 0
+        )
+    }
+
+    /// Offset per join. `uniquingKeysWith:` rather than `uniqueKeysWithValues:` — a duplicated
+    /// seam is a malformed manifest, and trapping on one is worse than laying it out with the
+    /// first value we saw.
+    private func offsets(_ seams: [Seam]) -> [Int: Int] {
+        Dictionary(seams.map { ($0.fromIndex, $0.provisionalDy) }, uniquingKeysWith: { first, _ in first })
+    }
+
+    /// The single copy of the layout rule. `plan` decorates these into `Piece`s; `placement`
+    /// publishes them as-is. Nothing else may re-derive it.
+    private func layoutSpans(_ session: StitchSession, dyByFrom: [Int: Int]) -> [Placement.Span] {
+        var spans: [Placement.Span] = []
+        var cursor = 0
+
+        for (s, seg) in splitIntoSegments(session).enumerated() {
+            if s > 0 {
+                spans.append(Placement.Span(
+                    keyframeIndex: nil, srcY: 0, height: separatorHeight,
+                    destY: cursor, segmentIndex: s, segmentLocalY: 0
+                ))
+                cursor += separatorHeight
+            }
+            var localY = 0
+
+            func add(_ index: Int, _ srcY: Int, _ height: Int) {
+                guard height > 0 else { return }
+                spans.append(Placement.Span(
+                    keyframeIndex: index, srcY: srcY, height: height,
+                    destY: cursor, segmentIndex: s, segmentLocalY: localY
+                ))
+                cursor += height
+                localY += height
+            }
+
+            if seg.count == 1 {
+                add(seg[0].index, 0, seg[0].pixelHeight)
+            } else {
+                // Missing-seam fallback. A well-formed session has a seam for every consecutive
+                // pair in a segment, so this only fires on a malformed/partial manifest — a
+                // recoverable case where *some* placement is required. We substitute the median
+                // of the segment's known positive offsets; zero/negative "offsets" are excluded
+                // as non-advances, and if none remain, half the current frame's visible content
+                // is a safe non-stacking default.
+                let knownDys = seg.dropLast().compactMap { dyByFrom[$0.index] }.filter { $0 > 0 }
+
+                let firstChrome = effectiveChromeInsets(session, for: seg[0], frameHeight: seg[0].pixelHeight)
+                add(seg[0].index, 0, seg[0].pixelHeight - firstChrome.bottom)
+                for j in 1..<seg.count {
+                    let previous = seg[j - 1]
+                    let current = seg[j]
+                    let previousChrome = effectiveChromeInsets(session, for: previous, frameHeight: previous.pixelHeight)
+                    let currentChrome = effectiveChromeInsets(session, for: current, frameHeight: current.pixelHeight)
+                    let previousContentBottom = previous.pixelHeight - previousChrome.bottom
+                    let currentContentBottom = current.pixelHeight - currentChrome.bottom
+                    let currentContentHeight = max(0, currentContentBottom - currentChrome.top)
+                    let fallbackDy = medianDy(knownDys) ?? max(1, currentContentHeight / 2)
+                    let dy = dyByFrom[previous.index] ?? fallbackDy
+                    let sourceStart = clamp(previousContentBottom - dy, to: currentChrome.top...currentContentBottom)
+                    add(current.index, sourceStart, currentContentBottom - sourceStart)
+                }
+                let last = seg[seg.count - 1]
+                let lastChrome = effectiveChromeInsets(session, for: last, frameHeight: last.pixelHeight)
+                if lastChrome.bottom > 0 {
+                    add(last.index, last.pixelHeight - lastChrome.bottom, lastChrome.bottom)
+                }
+            }
+        }
+        return spans
+    }
+
+    /// Median of the segment's known offsets, or `nil` if there are none.
+    private func medianDy(_ dys: [Int]) -> Int? {
+        guard !dys.isEmpty else { return nil }
+        let sorted = dys.sorted()
+        return sorted[sorted.count / 2]
+    }
+
+    private func effectiveChromeInsets(_ session: StitchSession, for keyframe: Keyframe, frameHeight: Int) -> ChromeInsets {
+        let insets = session.resolvedChrome(for: keyframe).insets
+        guard insets.isPlausible(forPixelHeight: frameHeight) else { return .zero }
+        return insets
+    }
+
+    private func clamp(_ value: Int, to range: ClosedRange<Int>) -> Int {
+        min(max(value, range.lowerBound), range.upperBound)
+    }
+
+    private func splitIntoSegments(_ session: StitchSession) -> [[Keyframe]] {
+        let ordered = session.keyframes.sorted { $0.index < $1.index }
+        var segments: [[Keyframe]] = []
+        var current: [Keyframe] = []
+        for kf in ordered {
+            current.append(kf)
+            if session.hasSegmentBreak(after: kf.index) {
+                segments.append(current); current = []
+            }
+        }
+        if !current.isEmpty { segments.append(current) }
+        return segments
+    }
+
+    // MARK: - Drawing
+
+    /// Draw source rows `[srcRow, srcRow+height)` of `piece` at output row `destY` (top-down:
+    /// `destY = 0` is the output's top row).
+    ///
+    /// Uses clip-and-draw rather than `CGImage.cropping`. A bitmap context has a **bottom-left**
+    /// origin, so a top-down destination row `destY` sits at drawing-Y `ctx.height - destY - h`;
+    /// an unflipped `ctx.draw` renders the image upright (its row 0 at the top of the draw rect).
+    /// Placing the whole image at drawing-Y `ctx.height - img.height - destY + srcRow` puts source
+    /// row `srcRow` at output row `destY`, and clipping to the destination band keeps just that
+    /// strip. (Drawing at `destY - srcRow` with a top-left mental model — as this once did —
+    /// mirrored the destination axis, stacking multi-piece segments bottom-up: a full single frame
+    /// filled the context so it looked correct, but every real multi-keyframe stitch came out
+    /// vertically block-reversed.)
+    private func drawStrip(_ piece: Piece, srcRow: Int, height: Int, destY: Int, in ctx: CGContext, images: (Keyframe) throws -> CGImage) throws {
+        let clip = CGRect(x: 0, y: ctx.height - destY - height, width: ctx.width, height: height)
+        guard let kf = piece.keyframe else {
+            ctx.setFillColor(gray: 0.85, alpha: 1)
+            ctx.fill(clip)
+            return
+        }
+        // Propagate a load failure: silently skipping the strip would leave an invisible gap
+        // in the composite. Let the caller fail the whole assembly instead.
+        let img = try images(kf)
+        ctx.saveGState()
+        ctx.clip(to: clip)
+        ctx.draw(img, in: CGRect(x: 0, y: ctx.height - img.height - destY + srcRow, width: img.width, height: img.height))
+        ctx.restoreGState()
+    }
+
+    // MARK: - Refinement
+
+    /// Pixel-exact vertical refinement around the provisional offset; falls back to the
+    /// provisional value when the local match isn't confident.
+    private func refineVertical(_ a: CGImage, _ b: CGImage, provisional: Int, rowMasks: RowMaskPair?) -> (dy: Int, confident: Bool) {
+        let h = a.height
+        let pa = profiler.profile(a, forcingHeight: h)
+        let pb = profiler.profile(b, forcingHeight: b.height)
+        let lo = max(1, provisional - refinementDelta)
+        let hi = min(h - matcher.minimumOverlap, provisional + refinementDelta)
+        guard hi >= lo else { return (provisional, false) }
+        let m = matcher.match(pa, pb, searchRange: lo...hi, rowMasks: rowMasks)
+        if m.confidence >= refinementConfidence { return (m.dy, true) }
+        return (provisional, false)
+    }
+
+    /// Screen-row mask marking the scrolling content of a frame `frameHeight` tall — `false`
+    /// over resolved chrome, `true` elsewhere. `nil` when there is nothing to mask.
+    ///
+    /// Chrome rows are the one thing in the frame that is *not* a function of scroll position, so
+    /// including them in the refinement score adds a constant-ish floor of noise that is unrelated
+    /// to the offset being measured. That noise doesn't usually move the argmin, but it badly
+    /// flattens the score valley — and refinement is gated on `refinementConfidence`, which is
+    /// exactly a measure of how deep that valley is. See `refineSeams` for the measurements.
+    private func contentRowMask(_ chrome: ResolvedChrome, frameHeight: Int) -> [Bool]? {
+        let insets = chrome.insets
+        guard insets.isPlausible(forPixelHeight: frameHeight) else { return nil }
+        let top = insets.top
+        let bottom = insets.bottom
+        guard top > 0 || bottom > 0 else { return nil }
+        return (0..<frameHeight).map { $0 >= top && $0 < frameHeight - bottom }
+    }
+
+    /// Lightweight incidental horizontal shift over the overlap band (monitoring only —
+    /// `dx` is never modeled, just flagged). Returns 0 when there's no decisive shift.
+    private func measureHorizontal(_ a: CGImage, _ b: CGImage, dy: Int) -> Int {
+        let sampleRows = 24
+        // Overlap in b's space: b rows [0, h-dy) correspond to a rows [dy, h).
+        let bandTop = max(0, (a.height - dy) / 2 - sampleRows / 2)
+        guard bandTop + sampleRows <= min(a.height - dy, b.height) else { return 0 }
+        // Full width (no downscale) so a few-pixel shift isn't lost to resampling.
+        guard let ca = columnMeans(a, y: bandTop + dy, rows: sampleRows, targetWidth: a.width),
+              let cb = columnMeans(b, y: bandTop, rows: sampleRows, targetWidth: b.width) else { return 0 }
+        var best = 0
+        var bestScore = Float.greatestFiniteMagnitude
+        var runnerUp = Float.greatestFiniteMagnitude
+        let width = min(ca.count, cb.count)
+        for shift in -6...6 {
+            var sum: Float = 0
+            var count: Float = 0
+            for x in 0..<width {
+                let bx = x + shift
+                guard bx >= 0, bx < width else { continue }
+                sum += abs(ca[x] - cb[bx]); count += 1
+            }
+            guard count > 0 else { continue }
+            let score = sum / count
+            if score < bestScore { runnerUp = bestScore; bestScore = score; best = shift }
+            else if score < runnerUp { runnerUp = score }
+        }
+        // Only report a decisive nonzero shift.
+        if best != 0, runnerUp < .greatestFiniteMagnitude, bestScore < runnerUp * 0.7 { return best }
+        return 0
+    }
+
+    private func columnMeans(_ image: CGImage, y: Int, rows: Int, targetWidth: Int = 64) -> [Float]? {
+        let width = min(targetWidth, image.width)
+        let cs = CGColorSpaceCreateDeviceGray()
+        // `CGImage.cropping` is top-referenced (y = 0 is the image's top row), so the genuine-top
+        // y maps straight through. (This previously used `image.height - y - rows`, which cropped
+        // the vertically-mirrored band — so the compared A/B bands covered non-overlapping content
+        // and no horizontal drift could ever be measured.)
+        guard y >= 0, y + rows <= image.height,
+              let ctx = CGContext(data: nil, width: width, height: rows, bitsPerComponent: 8, bytesPerRow: 0, space: cs, bitmapInfo: CGImageAlphaInfo.none.rawValue),
+              let crop = image.cropping(to: CGRect(x: 0, y: y, width: image.width, height: rows)) else { return nil }
+        ctx.interpolationQuality = .none
+        ctx.draw(crop, in: CGRect(x: 0, y: 0, width: width, height: rows))
+        guard let data = ctx.data else { return nil }
+        let bpr = ctx.bytesPerRow
+        var cols = [Float](repeating: 0, count: width)
+        data.withMemoryRebound(to: UInt8.self, capacity: bpr * rows) { base in
+            for r in 0..<rows {
+                for c in 0..<width { cols[c] += Float(base[r * bpr + c]) }
+            }
+        }
+        return vDSP.divide(cols, Float(rows * 255))
+    }
+
+    private func firstImage(_ session: StitchSession, _ images: (Keyframe) throws -> CGImage) throws -> CGImage {
+        let first = session.keyframes.min { $0.index < $1.index }!
+        return try images(first)
+    }
+}
+
+// MARK: - Placement
+
+/// A read-only view of the composite's layout: where every source strip lands, without
+/// drawing anything or loading a single image.
+///
+/// This exists so the app can answer "how far down the finished capture is this join?" —
+/// which the margin markers and the position scale need — without re-deriving
+/// `plan`'s rule. `JoinAlignment` is already a second copy of that rule, paid for with a test
+/// against a real composite; a third copy is what this replaces. `plan` and `placement` both
+/// call the same private walk, so there is nothing to drift.
+public struct Placement: Sendable, Equatable {
+    /// One laid-out strip: source rows `[srcY, srcY + height)` of the keyframe at
+    /// `keyframeIndex`, drawn at `destY` in the composite. `keyframeIndex == nil` is a
+    /// segment separator band, which comes from no keyframe at all.
+    public struct Span: Sendable, Equatable {
+        public let keyframeIndex: Int?
+        public let srcY: Int
+        public let height: Int
+        public let destY: Int
+        /// Which segment this strip belongs to. A separator carries the index of the segment
+        /// it precedes.
+        public let segmentIndex: Int
+        /// Destination Y within the segment, for the PDF paginator.
+        public let segmentLocalY: Int
+    }
+
+    public let spans: [Span]
+    public let totalHeight: Int
+
+    public init(spans: [Span]) {
+        self.spans = spans
+        self.totalHeight = spans.last.map { $0.destY + $0.height } ?? 0
+    }
+
+    public var segmentCount: Int {
+        (spans.map(\.segmentIndex).max() ?? -1) + 1
+    }
+
+    /// The first strip contributed by a keyframe. A segment's last frame contributes a second
+    /// strip for its bottom chrome; this is deliberately the first.
+    public func firstSpan(forKeyframeIndex index: Int) -> Span? {
+        spans.first { $0.keyframeIndex == index }
+    }
+
+    /// Where the join between `joinIndex` and `joinIndex + 1` sits — the row at which the
+    /// lower frame starts contributing.
+    ///
+    /// `nil` when there is no such join: the pair does not exist, or a segment break sits
+    /// between them, in which case nothing overlaps and there is nothing to line up.
+    public func destY(forJoin joinIndex: Int) -> Int? {
+        guard let i = spans.firstIndex(where: { $0.keyframeIndex == joinIndex + 1 }) else { return nil }
+        guard i > spans.startIndex, spans[i - 1].keyframeIndex != nil else { return nil }
+        return spans[i].destY
+    }
+
+    /// Where the separator band after `keyframeIndex` sits, or `nil` if no break follows it.
+    public func destY(forBreakAfter keyframeIndex: Int) -> Int? {
+        guard let i = spans.lastIndex(where: { $0.keyframeIndex == keyframeIndex }) else { return nil }
+        let next = spans.index(after: i)
+        guard next < spans.endIndex, spans[next].keyframeIndex == nil else { return nil }
+        return spans[next].destY
+    }
+}
+

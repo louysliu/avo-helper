@@ -1,0 +1,646 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		232E78B7A0921B6831E65752 /* ExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E002A9905D8E9B61B1229E /* ExportService.swift */; };
+		407FC0B9E8BB2AA08D75D18C /* ImageCropperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EFC91C350472F7398705FF /* ImageCropperTests.swift */; };
+		4FF3B5EBD6BD4811DEF53BED /* AvoHelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B0EA3E3C6D2D50E8AB6BE /* AvoHelperApp.swift */; };
+		5853878892238AD192E7C82B /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1C55E9333E851E043A470E /* ResultView.swift */; };
+		60A002C09E814A391B9074DC /* AvoHelperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67A80186E96EDF0D8B19E81 /* AvoHelperUITests.swift */; };
+		693C9DF3DD16A7C2A91C46B0 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCE8A261CBBE4B9ADE7F098 /* ShareSheet.swift */; };
+		6D90CBA66C98FBD522668146 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636477EB38C80AD4D5388015 /* SelectionView.swift */; };
+		746817218FD2B0D5390D0C56 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E39F992D4213D01050AE06B /* RootView.swift */; };
+		8806E005E701E624F0BE1DD3 /* StitchingEngines in Frameworks */ = {isa = PBXBuildFile; productRef = F5A6273866170AC830E944CF /* StitchingEngines */; };
+		898E4EB8376BD1622E96B89C /* ImageCropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A70BB897049A7998854728 /* ImageCropper.swift */; };
+		96E6609E4E7EC157FFD2C227 /* ImageStitcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7F2EFE4FBC925ED66A769D /* ImageStitcherTests.swift */; };
+		A33A6EA14A55A8B0953B833F /* CropEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70DCA62DBA1A3FB920466A2 /* CropEditorView.swift */; };
+		A3601A51C1CD4FBAB9E9769D /* CropGeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F74D28A05903BDE41D84D1 /* CropGeometryTests.swift */; };
+		BA0D6FFBE82DD0B3803E3209 /* StitchingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B557B9F0479D0B4F7D093BCA /* StitchingModels.swift */; };
+		C98D11D16566BEC46AF25E6F /* PortedImageStitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999E2FEF1B43CF90AE4DA828 /* PortedImageStitcher.swift */; };
+		E3DC1E96E65A28B5ACE3D605 /* PortedImageStitcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC197EB24FA9325CB2A88982 /* PortedImageStitcherTests.swift */; };
+		EAA106A4449BA2587B4E72DE /* ImageStitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D601EF7FE644957E632D6 /* ImageStitcher.swift */; };
+		F0D22F63C82EB107C9A236A8 /* StitchingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D77A1EB4406F93E6041182 /* StitchingSession.swift */; };
+		F37C532E277DB77D4D29692C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48BDBD28923BE82561EDC1C8 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4A32B3EF40CF008BCAF6A093 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81562C52E68D9A4D9D9F6806 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 453DD8A90EF9365403418C63;
+			remoteInfo = AvoHelper;
+		};
+		DCE8A9A791DD8870A4A878B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81562C52E68D9A4D9D9F6806 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 453DD8A90EF9365403418C63;
+			remoteInfo = AvoHelper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0664A229B126C800C37A17AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3B1C55E9333E851E043A470E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		3E5E50511663A793E48FBCFB /* AvoHelperUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = AvoHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		48BDBD28923BE82561EDC1C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		48E002A9905D8E9B61B1229E /* ExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportService.swift; sourceTree = "<group>"; };
+		4D7F2EFE4FBC925ED66A769D /* ImageStitcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStitcherTests.swift; sourceTree = "<group>"; };
+		4E39F992D4213D01050AE06B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		636477EB38C80AD4D5388015 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		69EFC91C350472F7398705FF /* ImageCropperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropperTests.swift; sourceTree = "<group>"; };
+		6E7B0EA3E3C6D2D50E8AB6BE /* AvoHelperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoHelperApp.swift; sourceTree = "<group>"; };
+		70F74D28A05903BDE41D84D1 /* CropGeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropGeometryTests.swift; sourceTree = "<group>"; };
+		86D77A1EB4406F93E6041182 /* StitchingSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchingSession.swift; sourceTree = "<group>"; };
+		8A05ED28DF2EDE6F717A85DD /* StitchingKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StitchingKit; path = Packages/StitchingKit; sourceTree = SOURCE_ROOT; };
+		999E2FEF1B43CF90AE4DA828 /* PortedImageStitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortedImageStitcher.swift; sourceTree = "<group>"; };
+		A67A80186E96EDF0D8B19E81 /* AvoHelperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvoHelperUITests.swift; sourceTree = "<group>"; };
+		A70DCA62DBA1A3FB920466A2 /* CropEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropEditorView.swift; sourceTree = "<group>"; };
+		AC197EB24FA9325CB2A88982 /* PortedImageStitcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortedImageStitcherTests.swift; sourceTree = "<group>"; };
+		AFCE8A261CBBE4B9ADE7F098 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		B557B9F0479D0B4F7D093BCA /* StitchingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StitchingModels.swift; sourceTree = "<group>"; };
+		B5DD51C2A2AC8203F6EF6B3D /* AvoHelperTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = AvoHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C08D601EF7FE644957E632D6 /* ImageStitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStitcher.swift; sourceTree = "<group>"; };
+		C1A70BB897049A7998854728 /* ImageCropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropper.swift; sourceTree = "<group>"; };
+		FDE4BD58A29AE00538682344 /* AvoHelper.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AvoHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EFBB416F769430879CCB95A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8806E005E701E624F0BE1DD3 /* StitchingEngines in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1224CC66350391BB155EFF45 /* AvoHelperTests */ = {
+			isa = PBXGroup;
+			children = (
+				70F74D28A05903BDE41D84D1 /* CropGeometryTests.swift */,
+				69EFC91C350472F7398705FF /* ImageCropperTests.swift */,
+				4D7F2EFE4FBC925ED66A769D /* ImageStitcherTests.swift */,
+				AC197EB24FA9325CB2A88982 /* PortedImageStitcherTests.swift */,
+			);
+			path = AvoHelperTests;
+			sourceTree = "<group>";
+		};
+		2CB2CF40566A2763C4BB89FD /* AvoHelper */ = {
+			isa = PBXGroup;
+			children = (
+				6E7B0EA3E3C6D2D50E8AB6BE /* AvoHelperApp.swift */,
+				833F2A6359A1A2EACAE3DCBF /* Models */,
+				B1D9048F38C96BA6357B812C /* Resources */,
+				655E7C3A47349536A4B95CA4 /* Services */,
+				4C38158DC6D0BEB39C4CF04D /* State */,
+				D6AA05E0F1FA07DCCB694E67 /* Views */,
+			);
+			path = AvoHelper;
+			sourceTree = "<group>";
+		};
+		4C38158DC6D0BEB39C4CF04D /* State */ = {
+			isa = PBXGroup;
+			children = (
+				86D77A1EB4406F93E6041182 /* StitchingSession.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		53A4A63733C92924BB900E0D /* AvoHelperUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A67A80186E96EDF0D8B19E81 /* AvoHelperUITests.swift */,
+			);
+			path = AvoHelperUITests;
+			sourceTree = "<group>";
+		};
+		655E7C3A47349536A4B95CA4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				48E002A9905D8E9B61B1229E /* ExportService.swift */,
+				C1A70BB897049A7998854728 /* ImageCropper.swift */,
+				C08D601EF7FE644957E632D6 /* ImageStitcher.swift */,
+				999E2FEF1B43CF90AE4DA828 /* PortedImageStitcher.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		833F2A6359A1A2EACAE3DCBF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B557B9F0479D0B4F7D093BCA /* StitchingModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B1D9048F38C96BA6357B812C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				48BDBD28923BE82561EDC1C8 /* Assets.xcassets */,
+				0664A229B126C800C37A17AF /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C0AEDC7C1CD3851A9A9877AE /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				8A05ED28DF2EDE6F717A85DD /* StitchingKit */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		D6AA05E0F1FA07DCCB694E67 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A70DCA62DBA1A3FB920466A2 /* CropEditorView.swift */,
+				3B1C55E9333E851E043A470E /* ResultView.swift */,
+				4E39F992D4213D01050AE06B /* RootView.swift */,
+				636477EB38C80AD4D5388015 /* SelectionView.swift */,
+				AFCE8A261CBBE4B9ADE7F098 /* ShareSheet.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ED78975A87651C1BB2976415 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FDE4BD58A29AE00538682344 /* AvoHelper.app */,
+				B5DD51C2A2AC8203F6EF6B3D /* AvoHelperTests.xctest */,
+				3E5E50511663A793E48FBCFB /* AvoHelperUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB8D91CE2168636C3D56934D = {
+			isa = PBXGroup;
+			children = (
+				2CB2CF40566A2763C4BB89FD /* AvoHelper */,
+				1224CC66350391BB155EFF45 /* AvoHelperTests */,
+				53A4A63733C92924BB900E0D /* AvoHelperUITests */,
+				C0AEDC7C1CD3851A9A9877AE /* Packages */,
+				ED78975A87651C1BB2976415 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		453DD8A90EF9365403418C63 /* AvoHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5BD902B4A16063B457428B1A /* Build configuration list for PBXNativeTarget "AvoHelper" */;
+			buildPhases = (
+				C305D30E6097235DA7239E84 /* Sources */,
+				7022412219BC50E724E29B3E /* Resources */,
+				EFBB416F769430879CCB95A0 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AvoHelper;
+			packageProductDependencies = (
+				F5A6273866170AC830E944CF /* StitchingEngines */,
+			);
+			productName = AvoHelper;
+			productReference = FDE4BD58A29AE00538682344 /* AvoHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		56F8C0A61BBB7718CF403EFB /* AvoHelperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D412585A8DDF88CA86C2506 /* Build configuration list for PBXNativeTarget "AvoHelperUITests" */;
+			buildPhases = (
+				CC956CDA668391B30311A951 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CB939EFE3264E2C7E971DF9 /* PBXTargetDependency */,
+			);
+			name = AvoHelperUITests;
+			packageProductDependencies = (
+			);
+			productName = AvoHelperUITests;
+			productReference = 3E5E50511663A793E48FBCFB /* AvoHelperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		6EC03F175C2EF30E15006115 /* AvoHelperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04BBFE16351CF2EA083FC5BB /* Build configuration list for PBXNativeTarget "AvoHelperTests" */;
+			buildPhases = (
+				D6E182A53EE15B0C7E727361 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				575B371CF1C5784126903B07 /* PBXTargetDependency */,
+			);
+			name = AvoHelperTests;
+			packageProductDependencies = (
+			);
+			productName = AvoHelperTests;
+			productReference = B5DD51C2A2AC8203F6EF6B3D /* AvoHelperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		81562C52E68D9A4D9D9F6806 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					453DD8A90EF9365403418C63 = {
+						ProvisioningStyle = Automatic;
+					};
+					56F8C0A61BBB7718CF403EFB = {
+						TestTargetID = 453DD8A90EF9365403418C63;
+					};
+				};
+			};
+			buildConfigurationList = 1FD26ED1CB340912CC4B3181 /* Build configuration list for PBXProject "AvoHelper" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = FB8D91CE2168636C3D56934D;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2229577D7688761FB284FD5A /* XCLocalSwiftPackageReference "Packages/StitchingKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = ED78975A87651C1BB2976415 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				453DD8A90EF9365403418C63 /* AvoHelper */,
+				6EC03F175C2EF30E15006115 /* AvoHelperTests */,
+				56F8C0A61BBB7718CF403EFB /* AvoHelperUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7022412219BC50E724E29B3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F37C532E277DB77D4D29692C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C305D30E6097235DA7239E84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FF3B5EBD6BD4811DEF53BED /* AvoHelperApp.swift in Sources */,
+				A33A6EA14A55A8B0953B833F /* CropEditorView.swift in Sources */,
+				232E78B7A0921B6831E65752 /* ExportService.swift in Sources */,
+				898E4EB8376BD1622E96B89C /* ImageCropper.swift in Sources */,
+				EAA106A4449BA2587B4E72DE /* ImageStitcher.swift in Sources */,
+				C98D11D16566BEC46AF25E6F /* PortedImageStitcher.swift in Sources */,
+				5853878892238AD192E7C82B /* ResultView.swift in Sources */,
+				746817218FD2B0D5390D0C56 /* RootView.swift in Sources */,
+				6D90CBA66C98FBD522668146 /* SelectionView.swift in Sources */,
+				693C9DF3DD16A7C2A91C46B0 /* ShareSheet.swift in Sources */,
+				BA0D6FFBE82DD0B3803E3209 /* StitchingModels.swift in Sources */,
+				F0D22F63C82EB107C9A236A8 /* StitchingSession.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC956CDA668391B30311A951 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60A002C09E814A391B9074DC /* AvoHelperUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6E182A53EE15B0C7E727361 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3601A51C1CD4FBAB9E9769D /* CropGeometryTests.swift in Sources */,
+				407FC0B9E8BB2AA08D75D18C /* ImageCropperTests.swift in Sources */,
+				96E6609E4E7EC157FFD2C227 /* ImageStitcherTests.swift in Sources */,
+				E3DC1E96E65A28B5ACE3D605 /* PortedImageStitcherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		575B371CF1C5784126903B07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 453DD8A90EF9365403418C63 /* AvoHelper */;
+			targetProxy = 4A32B3EF40CF008BCAF6A093 /* PBXContainerItemProxy */;
+		};
+		6CB939EFE3264E2C7E971DF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 453DD8A90EF9365403418C63 /* AvoHelper */;
+			targetProxy = DCE8A9A791DD8870A4A878B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		21AEA0C27C79DBD617FC936D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.louis.AvoHelperTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AvoHelper.app/AvoHelper";
+			};
+			name = Debug;
+		};
+		280056D83ACA29D94E930AAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.louis.AvoHelperUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AvoHelper;
+			};
+			name = Release;
+		};
+		53905E54AE250427AE974A08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		53AEA37B46461DE914849593 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.louis.AvoHelperUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AvoHelper;
+			};
+			name = Debug;
+		};
+		5E4EB9698B431FCDF742A1A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		79344A087DE3A07DC2752D54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AvoHelper/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.louis.AvoHelper;
+				PRODUCT_NAME = AvoHelper;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8307D5CAF6B870DD2380C3FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.louis.AvoHelperTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AvoHelper.app/AvoHelper";
+			};
+			name = Release;
+		};
+		C94A04BC37D9E5809956A774 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AvoHelper/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.louis.AvoHelper;
+				PRODUCT_NAME = AvoHelper;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04BBFE16351CF2EA083FC5BB /* Build configuration list for PBXNativeTarget "AvoHelperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21AEA0C27C79DBD617FC936D /* Debug */,
+				8307D5CAF6B870DD2380C3FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1FD26ED1CB340912CC4B3181 /* Build configuration list for PBXProject "AvoHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E4EB9698B431FCDF742A1A0 /* Debug */,
+				53905E54AE250427AE974A08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2D412585A8DDF88CA86C2506 /* Build configuration list for PBXNativeTarget "AvoHelperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53AEA37B46461DE914849593 /* Debug */,
+				280056D83ACA29D94E930AAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5BD902B4A16063B457428B1A /* Build configuration list for PBXNativeTarget "AvoHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79344A087DE3A07DC2752D54 /* Debug */,
+				C94A04BC37D9E5809956A774 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		2229577D7688761FB284FD5A /* XCLocalSwiftPackageReference "Packages/StitchingKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/StitchingKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F5A6273866170AC830E944CF /* StitchingEngines */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StitchingEngines;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 81562C52E68D9A4D9D9F6806 /* Project object */;
+}
