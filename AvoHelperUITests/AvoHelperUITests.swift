@@ -13,6 +13,33 @@ final class AvoHelperUITests: XCTestCase {
         XCTAssertTrue(app.buttons["选择截图"].exists)
     }
 
+    func testSwitchesWorkflowsAndVideoEngines() {
+        let app = XCUIApplication()
+        app.launch()
+        let menu = app.buttons["workflow-menu"]
+        XCTAssertTrue(menu.waitForExistence(timeout: 5))
+        menu.tap()
+        app.buttons["视频转长截图"].tap()
+        XCTAssertTrue(app.staticTexts["选择滚动录屏"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.buttons["从相册选择"].exists)
+        XCTAssertTrue(app.buttons["从文件选择"].exists)
+        XCTAssertFalse(app.buttons["生成长截图"].isEnabled)
+        let algorithmMenu = app.buttons["video-algorithm-menu"]
+        XCTAssertTrue(algorithmMenu.exists)
+        algorithmMenu.tap()
+        app.buttons["hypr-longshot"].tap()
+        XCTAssertTrue(app.staticTexts["适合平稳向下滚动；遇到无法连接的内容会分段保留。"].exists)
+        algorithmMenu.tap()
+        app.buttons["Long Screen"].tap()
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "视频转换页面"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        menu.tap()
+        app.buttons["多张截图拼接"].tap()
+        XCTAssertTrue(app.staticTexts["选择滚动截图"].waitForExistence(timeout: 3))
+    }
+
     func testOpensCropEditorFromDemoResult() {
         let app = XCUIApplication()
         app.launchArguments = ["--demo-result"]

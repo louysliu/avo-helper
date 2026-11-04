@@ -1,0 +1,9 @@
+[package]
+name = "long-screen-bridge"
+version = "0.1.0"
+edition = "2021"
+[lib]
+crate-type = ["staticlib"]
+[dependencies]
+long-screen = { path = "vendor/long-screen", default-features = false, features = ["driver"] }
+serde_json = "1.0.152"
