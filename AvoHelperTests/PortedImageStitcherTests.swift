@@ -1,7 +1,28 @@
 import XCTest
+import StitchingEngines
 @testable import AvoHelper
 
 final class PortedImageStitcherTests: XCTestCase {
+    func testEkibunNativeTranslationExportsOriginalPixels() async throws {
+        let width = 160, height = 300
+        var pixels = [UInt8](repeating: 255, count: width * height * 4)
+        for y in 0..<height { for x in 0..<width {
+            var value = UInt64(y * width + x + 1001)
+            value = (value ^ (value >> 16)) &* 0x45d9f3b
+            value = (value ^ (value >> 16)) &* 0x45d9f3b
+            value ^= value >> 16
+            for c in 0..<3 { pixels[(y * width + x) * 4 + c] = UInt8(truncatingIfNeeded: value >> (8 * c)) }
+        } }
+        let source = try RasterIO.cgImage(RasterImage(width: width, height: height, pixels: pixels))
+        let first = try XCTUnwrap(source.cropping(to: CGRect(x: 0, y: 0, width: width, height: 240)))
+        let next = try XCTUnwrap(source.cropping(to: CGRect(x: 0, y: 60, width: width, height: 240)))
+        let result = try await PortedImageStitcher(choice: .ekibun).stitch(images: [UIImage(cgImage: first), UIImage(cgImage: next)])
+        defer { try? FileManager.default.removeItem(at: result.pngURL) }
+        XCTAssertEqual(result.seams.map(\.status), [.matched])
+        XCTAssertEqual(result.pixelSize, CGSize(width: width, height: height))
+        XCTAssertEqual(try RasterIO.load(result.pngURL).pixels, pixels)
+    }
+
     func testAllFourEnginesExportDuplicateWithoutGrowingImage() async throws {
         let format = UIGraphicsImageRendererFormat(); format.scale = 1; format.opaque = true
         let image = UIGraphicsImageRenderer(size: CGSize(width: 160, height: 240), format: format).image { context in

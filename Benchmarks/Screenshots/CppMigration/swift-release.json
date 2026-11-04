@@ -1,0 +1,43 @@
+[
+  {
+    "group": "1",
+    "analysisMilliseconds": 214.99866666272283,
+    "compositionMilliseconds": 4.32587499381043,
+    "offsets": [
+      1054,
+      1464,
+      null
+    ],
+    "outputHeight": 7762
+  },
+  {
+    "group": "2",
+    "analysisMilliseconds": 228.62395833362825,
+    "compositionMilliseconds": 2.3087500012479722,
+    "offsets": [
+      1225,
+      1462,
+      1083
+    ],
+    "outputHeight": 6392
+  },
+  {
+    "group": "3",
+    "analysisMilliseconds": 73.05500001530163,
+    "compositionMilliseconds": 1.2655000027734786,
+    "offsets": [
+      1452
+    ],
+    "outputHeight": 4074
+  },
+  {
+    "group": "4",
+    "analysisMilliseconds": 158.2559166708961,
+    "compositionMilliseconds": 1.9515416643116623,
+    "offsets": [
+      1541,
+      928
+    ],
+    "outputHeight": 5091
+  }
+]

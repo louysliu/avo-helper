@@ -1,0 +1,363 @@
+[
+  {
+    "analysisMilliseconds": 678.7997916690074,
+    "compositionMilliseconds": 315.6899166642688,
+    "engine": "ekibun",
+    "group": "1",
+    "inputs": [
+      {
+        "height": 2622,
+        "name": "1-1.HEIC",
+        "sha256": "106333bf1310fc22441584d080b17ad63482a135cb841bcac7e5273597d6ec63",
+        "width": 1206
+      },
+      {
+        "height": 2622,
+        "name": "1-2.HEIC",
+        "sha256": "2a1fd2c4ce1119fbb6229438d5db56fa9c99345ae9d28b99f18256148fc425d0",
+        "width": 1206
+      },
+      {
+        "height": 2622,
+        "name": "1-3.HEIC",
+        "sha256": "9b55c2b968bdb3e8a119cbd750a6c147b127db4498b6d9423aabebbe979c6e03",
+        "width": 1206
+      },
+      {
+        "height": 2622,
+        "name": "1-4.HEIC",
+        "sha256": "e4a97724935df3c8ad56b39a4af507f86ceffbcaaff6fde4c3b1011f9b525397",
+        "width": 1206
+      }
+    ],
+    "outputHeight": 7762,
+    "outputWidth": 1206,
+    "plan": {
+      "alignments": [
+        {
+          "confidence": 0.3018147406280145,
+          "diagnostic": "OpenCV 4.13.0 C++; raw=(0.512761157932232,1054.0079359021536); response=0.3455933831273418; RGB error=8.107311241328214",
+          "offsetX": 0,
+          "offsetY": 1054,
+          "status": "matched"
+        },
+        {
+          "confidence": 0.12649619151585717,
+          "diagnostic": "OpenCV 4.13.0 C++; raw=(0.5042451535190366,-1236.0038877751358); response=0.15657462878986636; RGB error=12.294584380717865",
+          "offsetX": 0,
+          "offsetY": 1464,
+          "status": "matched"
+        },
+        {
+          "confidence": 0,
+          "diagnostic": "OpenCV 4.13.0 C++; raw=(1.2075918883704162,930.5413387417523); response=0.00502216482853837; RGB error=0.0",
+          "offsetX": 0,
+          "offsetY": 0,
+          "status": "unmatched"
+        }
+      ],
+      "bounds": [
+        {
+          "bottom": 2622,
+          "top": 0
+        },
+        {
+          "bottom": 2622,
+          "top": 0
+        },
+        {
+          "bottom": 2622,
+          "top": 0
+        },
+        {
+          "bottom": 2622,
+          "top": 0
+        }
+      ],
+      "engineID": "ekibun",
+      "notes": [
+        "Ekibun original C++ phase correlation + OpenCV 4.13.0; full-resolution RGBA.",
+        "Host overlap verification and periodic-shift disambiguation; full frame bounds. Homography mode is not included."
+      ]
+    },
+    "seams": [
+      {
+        "firstIndex": 0,
+        "outputY": 1840,
+        "overlap": 1568,
+        "secondIndex": 1,
+        "sourceY": 786,
+        "status": "matched"
+      },
+      {
+        "firstIndex": 1,
+        "outputY": 3111,
+        "overlap": 1158,
+        "secondIndex": 2,
+        "sourceY": 593,
+        "status": "matched"
+      },
+      {
+        "firstIndex": 2,
+        "outputY": 5140,
+        "overlap": 0,
+        "secondIndex": 3,
+        "sourceY": 0,
+        "status": "unmatched"
+      }
+    ],
+    "warnings": []
+  },
+  {
+    "analysisMilliseconds": 843.6541249975562,
+    "compositionMilliseconds": 1022.3735833424143,
+    "engine": "ekibun",
+    "group": "2",
+    "inputs": [
+      {
+        "height": 2622,
+        "name": "2-1.HEIC",
+        "sha256": "515b3c1f88a3d9e85d4ad0da7bae09682093843fd32b677b8ccf62a179b0b1ba",
+        "width": 1206
+      },
+      {
+        "height": 2622,
+        "name": "2-2.HEIC",
+        "sha256": "347a0300e7b637755ec986e741043fd6dacf5395c88258036b9198bdac18c95f",
+        "width": 1206
+      },
+      {
+        "height": 2622,
+        "name": "2-3.HEIC",
+        "sha256": "36eef1bb8a5a49cfa43ccc6e836f132beb1c665fd8103e6736ab7d792a34c840",
+        "width": 1206
+      },
+      {
+        "height": 2622,
+        "name": "2-4.HEIC",
+        "sha256": "d7d6f665f5a71c6edcb710029eab1cae404760bb979dd457c780a0cb9179e1d6",
+        "width": 1206
+      }
+    ],
+    "outputHeight": 6392,
+    "outputWidth": 1206,
+    "plan": {
+      "alignments": [
+        {
+          "confidence": 0.19304403956311522,
+          "diagnostic": "OpenCV 4.13.0 C++; raw=(0.5031531920376437,1224.9948240090437); response=0.30984653100343573; RGB error=24.126006600660066",
+          "offsetX": 0,
+          "offsetY": 1225,
+          "status": "matched"
+        },
+        {
+          "confidence": 0.03671484556962402,
+          "diagnostic": "OpenCV 4.13.0 C++; raw=(0.456350054414429,-1238.1106710136896); response=0.06648606809595739; RGB error=28.658007553332652",
+          "offsetX": 0,
+          "offsetY": 1462,
+          "status": "matched"
+        },
+        {
+          "confidence": 0.3091983747786828,
+          "diagnostic": "OpenCV 4.13.0 C++; raw=(0.4999419472411546,1082.9982009513371); response=0.4559811466505189; RGB error=20.601942577677455",
+          "offsetX": 0,
+          "offsetY": 1083,
+          "status": "matched"
+        }
+      ],
+      "bounds": [
+        {
+          "bottom": 2622,
+          "top": 0
+        },
+        {
+          "bottom": 2622,
+          "top": 0
+        },
+        {
+          "bottom": 2622,
+          "top": 0
+        },
+        {
+          "bottom": 2622,
+          "top": 0
+        }
+      ],
+      "engineID": "ekibun",
+      "notes": [
+        "Ekibun original C++ phase correlation + OpenCV 4.13.0; full-resolution RGBA.",
+        "Host overlap verification and periodic-shift disambiguation; full frame bounds. Homography mode is not included."
+      ]
+    },
+    "seams": [
+      {
+        "firstIndex": 0,
+        "outputY": 1925,
+        "overlap": 1397,
+        "secondIndex": 1,
+        "sourceY": 700,
+        "status": "matched"
+      },
+      {
+        "firstIndex": 1,
+        "outputY": 3266,
+        "overlap": 1160,
+        "secondIndex": 2,
+        "sourceY": 579,
+        "status": "matched"
+      },
+      {
+        "firstIndex": 2,
+        "outputY": 4556,
+        "overlap": 1539,
+        "secondIndex": 3,
+        "sourceY": 786,
+        "status": "matched"
+      }
+    ],
+    "warnings": []
+  },
+  {
+    "analysisMilliseconds": 230.09341667057015,
+    "compositionMilliseconds": 139.83866668422706,
+    "engine": "ekibun",
+    "group": "3",
+    "inputs": [
+      {
+        "height": 2622,
+        "name": "3-1.HEIC",
+        "sha256": "9811c2addbe5ab32fcd999c8cb6cd267c9a998529a048411291a985a06576a62",
+        "width": 1206
+      },
+      {
+        "height": 2622,
+        "name": "3-2.HEIC",
+        "sha256": "03980a1bd8c900cdfa2de9541640e619eb89a4feb0146d0f800fe3e868b43d2c",
+        "width": 1206
+      }
+    ],
+    "outputHeight": 4074,
+    "outputWidth": 1206,
+    "plan": {
+      "alignments": [
+        {
+          "confidence": 0.270266491777263,
+          "diagnostic": "OpenCV 4.13.0 C++; raw=(0.5008830710937673,-1247.9811391109984); response=0.36578454167299157; RGB error=16.71244816789371",
+          "offsetX": 0,
+          "offsetY": 1452,
+          "status": "matched"
+        }
+      ],
+      "bounds": [
+        {
+          "bottom": 2622,
+          "top": 0
+        },
+        {
+          "bottom": 2622,
+          "top": 0
+        }
+      ],
+      "engineID": "ekibun",
+      "notes": [
+        "Ekibun original C++ phase correlation + OpenCV 4.13.0; full-resolution RGBA.",
+        "Host overlap verification and periodic-shift disambiguation; full frame bounds. Homography mode is not included."
+      ]
+    },
+    "seams": [
+      {
+        "firstIndex": 0,
+        "outputY": 2038,
+        "overlap": 1170,
+        "secondIndex": 1,
+        "sourceY": 586,
+        "status": "matched"
+      }
+    ],
+    "warnings": []
+  },
+  {
+    "analysisMilliseconds": 321.0593333351426,
+    "compositionMilliseconds": 200.4091666894965,
+    "engine": "ekibun",
+    "group": "4",
+    "inputs": [
+      {
+        "height": 2622,
+        "name": "4-1.HEIC",
+        "sha256": "bb05bc2087ff385f937c0ef9187c7b4c85d438d637f3c958d68c83ffd1470891",
+        "width": 1206
+      },
+      {
+        "height": 2622,
+        "name": "4-2.HEIC",
+        "sha256": "0cd6974a2d668e9ffa12e57f1073c5e8252f81567403f008ce7f02dddd02b39c",
+        "width": 1206
+      },
+      {
+        "height": 2622,
+        "name": "4-3.HEIC",
+        "sha256": "231610b01c59f7b6c0528b88ce3bfd52ab8a31827db87d9388cf20e62a770c38",
+        "width": 1206
+      }
+    ],
+    "outputHeight": 5091,
+    "outputWidth": 1206,
+    "plan": {
+      "alignments": [
+        {
+          "confidence": 0.28485367258042665,
+          "diagnostic": "OpenCV 4.13.0 C++; raw=(0.4861431302178971,-1158.983491601232); response=0.3899809463377077; RGB error=17.252498060865996",
+          "offsetX": 0,
+          "offsetY": 1541,
+          "status": "matched"
+        },
+        {
+          "confidence": 0.3128283586540529,
+          "diagnostic": "OpenCV 4.13.0 C++; raw=(0.5220089725919479,927.9981715132299); response=0.37193665406395676; RGB error=10.170901052369388",
+          "offsetX": 0,
+          "offsetY": 928,
+          "status": "matched"
+        }
+      ],
+      "bounds": [
+        {
+          "bottom": 2622,
+          "top": 0
+        },
+        {
+          "bottom": 2622,
+          "top": 0
+        },
+        {
+          "bottom": 2622,
+          "top": 0
+        }
+      ],
+      "engineID": "ekibun",
+      "notes": [
+        "Ekibun original C++ phase correlation + OpenCV 4.13.0; full-resolution RGBA.",
+        "Host overlap verification and periodic-shift disambiguation; full frame bounds. Homography mode is not included."
+      ]
+    },
+    "seams": [
+      {
+        "firstIndex": 0,
+        "outputY": 2081,
+        "overlap": 1081,
+        "secondIndex": 1,
+        "sourceY": 540,
+        "status": "matched"
+      },
+      {
+        "firstIndex": 1,
+        "outputY": 3321,
+        "overlap": 1694,
+        "secondIndex": 2,
+        "sourceY": 852,
+        "status": "matched"
+      }
+    ],
+    "warnings": []
+  }
+]

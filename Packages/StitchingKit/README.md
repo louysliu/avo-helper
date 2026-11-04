@@ -18,7 +18,7 @@ UIImage / HEIC → RasterImage (RGBA8, original pixels)
 ```
 
 * `StitchingCore`: 像素契约、ImageIO 解码、统一硬切合成器。无 UIKit、无算法选择。
-* 四个算法 target：只依赖 Core，彼此不依赖。来源、固定 commit、许可证、改动范围、单独回归工具在 `Ports/`。
+* 四个算法 target：彼此不依赖。Ekibun 通过 C ABI 依赖 `EkibunNative` 和固定版本 OpenCV XCFramework；其余三个只依赖 Core。来源、固定 commit、许可证、改动范围、单独回归工具在 `Ports/`。
 * `StitchingEngines`: 唯一注册表、工厂和显示名称。添加算法无需修改合成器。
 * `StitchBenchmark`: macOS 可执行工具，直接读取同一批原图，生成图片、逐接缝 JSON 和 HTML 对比页。
 * App 的 `PortedImageStitcher`：UIImage 方向、后台执行、临时文件和预览生命周期；不实现匹配算法。
@@ -31,16 +31,17 @@ UIImage / HEIC → RasterImage (RGBA8, original pixels)
 
 | 引擎 | 本项目实现 | 明确未移植 |
 |---|---|---|
-| Ekibun | 默认自动模式：diff mask + Laplacian + FFT phase correlation；Swift 数值适配和局部原像素验证 | 可选 SIFT / FLANN / homography 特征分支，原应用手动编辑 UI |
+| Ekibun | 原始 C++ 默认自动模式：diff mask + Laplacian + OpenCV phaseCorrelate；薄 Swift 接口和独立 C++ 验证层 | 可选 SIFT / FLANN / homography 特征分支，原应用手动编辑 UI |
 | LongStitch | Rust session 的精确/粗行指纹、公共连续段、唯一行证据、亮度回退；Swift 相邻帧适配 | 累积长图的回滚搜索、内容刷新和原 commit 合成过程 |
 | ZoomIt | Microsoft **Zoomit-Mac** 原始分辨率 matcher，保留上游搜索路径和固定头尾检测 | Windows C++ 的完整实现与五帧悬浮组件 mask，连续采集丢帧/动量状态 |
 | Seamly | 实际 StitchKit 源码，input-order 离线规划、tile consensus、独立 chrome、原分辨率 refinement | 自动重排序、录屏/采样、repair UI、原生最终合成与 PDF |
 
-这些是用于统一对照的算法适配器，不能将结果直接等同于四个原应用的整体产品效果。此次允许其他语言库，但现有 Swift 来源和小型匹配器移植已能满足双平台构建；Rust 原实现仍通过 parity harness 做了独立对照。
+这些是用于统一对照的算法适配器，不能将结果直接等同于四个原应用的整体产品效果。Ekibun 的原 Swift FFT 重写版已替换为 C++／OpenCV；其余实现和注册接口保留。Rust 原实现仍通过 parity harness 做独立对照。
 
 ## 来源和许可记录
 
 * Ekibun `07c61d250824cddcaa84af38042334efe2ad0070`，LGPL-2.1，见 `Ports/Ekibun/`。
+* OpenCV 4.13.0，Apache-2.0，通过 `yeatse/opencv-spm` 精确版本和校验过的 XCFramework 集成，见 `Package.resolved` 和 `Ports/Ekibun/OpenCV-LICENSE`。
 * jietuba `5eb635bd88eab96c1a3bd4273478ce15e161541b`，MIT，见 `Ports/LongStitch/`。
 * Zoomit-Mac `45e15ac00c578fa9b6ca68d5e474b01dbc5d50ef`，MIT，见 `Ports/ZoomIt/`。
 * Seamly `ed371adfc13151f95c95b6e3e8e3ff8790075d8d`，上游许可证 **TBD**，本地实验用途，未将其标成可发布的许可依赖。见 `Ports/Seamly/`。

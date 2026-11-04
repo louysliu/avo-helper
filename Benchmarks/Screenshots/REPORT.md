@@ -1,3 +1,5 @@
+> Historical Swift-port baseline. Current Ekibun C++ migration measurements: [CppMigration/REPORT.md](CppMigration/REPORT.md).
+
 # 四种截图拼接算法评测
 
 日期：2026-11-05（Asia/Taipei）。输入为 `LocalTestData/Screenshots/1…4`，共 13 张 1206×2622 HEIC，按文件名数字顺序，合计 9 个相邻接缝。使用本机 macOS Release 构建，原图解码后在相同像素输入、相同最终合成器上运行。未针对某组图片调阈值。

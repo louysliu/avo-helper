@@ -22,7 +22,7 @@
 xcodegen generate
 ```
 
-应用不包含第三方运行时依赖，图片处理和导出均在设备本地完成。
+图片处理和导出均在设备本地完成。Ekibun 使用原始 C++ 配准代码和固定版本 OpenCV 4.13.0，依赖只在构建时下载，不需要在线图像处理服务。
 
 四种移植算法使用本地 Swift package 封装，包含第三方来源代码；具体移植范围和许可记录见 [StitchingKit](Packages/StitchingKit/README.md)。Seamly 上游许可尚未确定，当前只作本地实验。
 
